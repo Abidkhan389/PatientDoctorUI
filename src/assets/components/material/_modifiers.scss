@@ -1,0 +1,16 @@
+// Material Modifiers
+
+/* TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version.*/
+.mat-radio-label {
+  margin-bottom: 0;
+}
+
+.mat-mdc-chip {
+  line-height: 1;
+}
+
+.page-mat-tabs {
+  .mat-mdc-tab-header {
+    margin: (-($grid-gutter-width)) (-($grid-gutter-width)) ($grid-gutter-width);
+  }
+}

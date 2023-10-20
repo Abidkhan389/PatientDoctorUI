@@ -1,0 +1,459 @@
+@import "assets/base";
+
+
+
+
+
+.card-min-height {
+  min-height: calc(100vh - 210px);
+}
+
+.mat-mdc-form-field,
+.category-form-action {
+  padding: 0px;
+}
+
+.category-form-action {
+  text-align: right;
+}
+
+.login {
+  width: 100%;
+  height: 100vh;
+  background-image: url('./assets/images/khazanaSECPLogin.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.filter-widget.card {
+  border-radius: 3px;
+  box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 9px 7px rgba(0, 0, 0, 0.08);
+  border: 0;
+  margin-top: 10px;
+  margin-bottom: 18px;
+
+  .filter-header {
+    border: 1px solid #eee;
+    border-bottom: 1px solid #dee2e6;
+    display: block;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    transition: 0.2s ease-in;
+    padding: 0.35em 1em;
+    /* background-color: #f4f4f4; */
+    color: #333333;
+    cursor: pointer;
+    color: #464457;
+
+    .filter-icon {
+      padding-right: 0.6rem;
+    }
+  }
+
+  .filter-content {
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+
+  }
+
+  .filter-title {
+    vertical-align: middle;
+    font-weight: 400;
+    font-size: 0.9rem;
+  }
+}
+
+.mat-mdc-dialog-container {
+  padding: 0px !important;
+}
+
+.mat-mdc-table {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.mat-column-name {
+  height: 100px;
+}
+
+.mubottomstyle {
+  margin-bottom: 0px !important;
+}
+
+.mat-mdc-form-field-error {
+  color: red !important;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+  color: grey !important;
+}
+
+.mat-mdc-select-panel {
+  max-width: 0px !important;
+  top: 42px !important;
+  top: 42px !important;
+  position: absolute !important;
+
+}
+
+input.mat-mdc-input-element {
+  margin-top: -0.0625em;
+  padding-top: 2.9px;
+}
+
+.ng-select-ng-select-opened>.ng-select-container :hover {
+  box-shadow: rgb(7, 152, 209) !important;
+}
+
+.mat-mdc-form-field.mat-warn .mat-mdc-input-element,
+.mat-form-field-invalid .mat-input-element {
+  caret-color: grey !important;
+}
+
+// .mat-input-element:disabled, .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+//   color: rgb(0 0 0 / 70%);
+//   background-color: rgb(245, 240, 240)
+// }
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-mdc-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: grey !important;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+  color: #6e6b6b !important;
+  font-size: 14px !important;
+}
+
+.ng-select .ng-select-container {
+  padding: 0px 0px 0px;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+  height: 30.36px !important;
+}
+
+.ng-select.ng-select-disabled>.ng-select-container {
+  background-color: rgb(245, 240, 240);
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+  color: #d1cccc;
+  font-size: 12px;
+}
+
+.font-small-1 {
+  font-size: 0.8rem !important;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  padding: 0.25rem;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: -0.75em;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0.5em 0 1em 0 !important;
+}
+
+.select.form-control.ng-pristine.ng-valid.ng-touched {
+  padding: 4px;
+}
+
+.form-control {
+  padding: 4px;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  display: flex;
+  position: absolute;
+  top: 0.25em;
+  left: -3px !important;
+  right: -5px !important;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+  color: grey !important;
+  opacity: 0.8 !important;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start {
+  border-width: 1px !important;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap {
+  border-width: 1px !important;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end {
+  border-width: 1px !important;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  display: flex;
+  position: absolute;
+  top: 0.25em;
+  left: -3px !important;
+  right: -5px !important;
+  bottom: 0;
+  pointer-events: none;
+}
+
+//form section styling for line
+.form-section {
+  color: #4c5053;
+  line-height: 2rem;
+  
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #4c5053;
+
+  i {
+    font-size: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+ 
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
+.span.mat-button-wrapper {
+  padding-left: 25px;
+}
+
+.form-section i {
+  font-size: 15px;
+}
+
+.form-section {
+  font-size: 0.85rem;
+  line-height: 2rem;
+  font-weight: 500;
+}
+
+.form-group {
+  margin-bottom: 0.6rem;
+}
+
+.drop-zone {
+  border: dashed 2px lightgray;
+  text-align: center;
+  color: #888585;
+  padding: 20px;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+
+.drop-area {
+  transition: all .5s ease-in-out;
+  display: none;
+  height: 0;
+}
+
+.drop-area.show {
+  height: auto;
+  display: block;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0.5em 0 1em 0 !important;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  padding: 0.25rem;
+}
+
+
+.form-control-feedback {
+  font-size: 0.7rem;
+  color: red;
+}
+
+.no-data {
+  background-color: lightgrey;
+}
+
+.form-control {
+  padding: 7px;
+}
+
+//for ng select background color
+.ng-select.ng-select-disabled>.ng-select-container {
+  background-color: white;
+  color: grey !important;
+  cursor: no-drop;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-input-element:disabled,
+.mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+  color: grey !important;
+  cursor: no-drop;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
+.mat-button-focus-overlay {
+  background-color: transparent !important;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-prefix.ng-tns-c255-13.ng-star-inserted {
+  right: 8px;
+  width: 18px;
+}
+
+
+
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-appearance-outline .mat-form-field-prefix {
+  top: 6px !important;
+  right: 7px !important;
+  width: 12px !important;
+  font-size: 15px;
+  font-weight: 600;
+  border-top-color: inherit;
+  height: 30px;
+  position: relative;
+
+  span {
+    position: absolute;
+    top: 11px;
+  }
+}
+
+.dynamicscrollbar {
+  overflow-y: auto;
+  height: auto;
+  max-height: 580px;
+}
+
+.swal2-popup .swal2-styled.swal2-cancel {
+  background-color: #beb0b0;
+}
+
+// .mat-form-field-appearance-outline .mat-form-field-prefix :focus{
+//   top:6px !important;
+//   right: 4px !important;
+//     width: 18px;
+//     font-size: 15px;
+//     font-weight: 600;
+//     border-top: 1px solid black;
+//     height: 30px;
+//     position:relative;
+//     span{
+//       position:absolute;
+//       top:11px ;
+//     }
+// }
+// .mat-form-field-appearance-outline .mat-form-field-prefix :hover{
+//   top:6px !important;
+//   right: 4px !important;
+//     width: 18px;
+//   border-color:  lightblue !important;
+//   height: 30px;
+//   position:relative;
+//   span{
+//     position:absolute;
+//     top:11px ;
+//   }
+// }
+// .mat-form-field.mat-form-field-should-float .mat-form-field-infix{
+//   position: initial;
+// }
+// .mat-form-field.mat-form-field-should-float .mat-form-field-label-wrapper{
+//   top: 0;
+//   left: 15px;
+// }
+
+
+.outer-border {
+  width: 770px;
+  height: 650px;
+  padding: 15px;
+  text-align: center;
+  border: 10px solid #22406b;
+}
+
+.inner-dotted-border {
+  width: 720px;
+  height: 600px;
+  padding: 20px;
+  text-align: center;
+  border: 5px solid #22406b;
+  border-style: dotted;
+}
+
+.certification {
+  font-size: 50px;
+  font-weight: bold;
+  color: #22406b;
+}
+
+.certify {
+  font-size: 25px;
+}
+
+.name {
+  font-size: 30px;
+  color: #80001a;
+}
+
+.fs-30 {
+  font-size: 30px;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.watermark {
+  width: 300px;
+  height: 100px;
+  display: block;
+  position: relative;
+}
+
+.action-button {
+  margin-left: -23px !important;
+  padding-left: 25px !important;
+}
+.certificatestyle{
+  font-weight: 600;
+  font-size: 15px;
+}
+.customcerfiticate{
+  font-size: 15px;
+}
+.userDetail-table
+{
+  width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+  .table-rows
+  {
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
