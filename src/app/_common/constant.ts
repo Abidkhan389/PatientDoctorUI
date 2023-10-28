@@ -28,6 +28,7 @@ export const APIPaths = {
     updateUser: accountUrl + 'activeInActive',
     addEditUSer: accountUrl + 'AddEditUser',
     getUserById: accountUrl + 'getUserById',
+    getAllRoles: accountUrl + 'getAllRoles',
 
     //-----------Course URLS---------------
     getAllCourses: courseUrl + 'GetAllByProc',

@@ -120,7 +120,13 @@ export class Helpers {
             img = image
         return img;
     }
-
+    public static appendPhoneNumber(val: any) {
+        if (val.length == 9) {
+          let mobile = '03' + val;
+          return mobile;
+        }
+        return null;
+      }
     public static isDefaultPicture(image: string) {
         let img: string = '../../../../../../../assets/img/logos/placeholder.png';
         if (image != null && image != "null" && image != "" && image != undefined && image != "undefined")

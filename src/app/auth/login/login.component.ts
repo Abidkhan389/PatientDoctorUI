@@ -1,6 +1,6 @@
 import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs/operators';
@@ -15,13 +15,13 @@ import { AuthService } from 'src/app/_services/auth.service';
   styles: []
 })
 export class LoginComponent implements OnInit {
-  form: UntypedFormGroup;
+  form: FormGroup;
   LogIndata: ILogin;
   returnUrl: string;
   result: any;
   validationMessages = Messages.validation_messages
   loading: boolean;
-  constructor(public formBuilder: UntypedFormBuilder, public router: Router, public authService: AuthService, private toastr: ToastrService) {
+  constructor(public formBuilder: FormBuilder, public router: Router, public authService: AuthService, private toastr: ToastrService) {
     this.LogIndata = {} as ILogin;
   }
 
@@ -45,18 +45,18 @@ export class LoginComponent implements OnInit {
 
   validateForm() {
     this.form = this.formBuilder.group({
-      email: new UntypedFormControl('', Validators.compose([
+      email: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(50),
         Validators.pattern(Patterns.emailRegex)
-      ])),
-      password: new UntypedFormControl('', Validators.compose([
+      ])],
+      password: ['', Validators.compose([
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(20),
-      ])),
-      rememberMe: new UntypedFormControl(false, Validators.compose([
-      ])),
+      ])],
+      rememberMe:[false, Validators.compose([
+      ])],
     });
   }
 

@@ -19,13 +19,28 @@ export class UserManagementService extends ApiService {
     let onSuccess = (value) => {
       let data = value;
       if (data.totalCount != 0) {
-        return data.data;
+        return data;
       } else {
         showErrorMessage(data.message)
         return false;
       }
     };
     return this.service(this.post(APIPaths.getAllUsers,model)).pipe(
+      map(value => this.processPayload(value)),
+      map(onSuccess)
+    );
+  }
+  getAllRoles() {
+    let onSuccess = (value) => {
+      let data = value;
+      if (data) {
+        return data;
+      } else {
+        showErrorMessage(data.message)
+        return false;
+      }
+    };
+    return this.service(this.get(APIPaths.getAllRoles)).pipe(
       map(value => this.processPayload(value)),
       map(onSuccess)
     );

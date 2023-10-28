@@ -143,7 +143,7 @@ export class UsersComponent implements OnInit {
       disableClose: true,
       autoFocus: false,
       data: {
-        courseId: Id,
+        userId: Id,
         IsReadOnly: IsReadOnly
       },
     })

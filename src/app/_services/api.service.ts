@@ -23,31 +23,31 @@ export abstract class ApiService implements IBaseService {
   constructor(protected httpClient: HttpClient) { }
 
 
-  // processPayload<T>(payload: IPayload<T>, messageTypeIds?: string[]) {
-  //   const message = payload.message;
-  //   messageTypeIds = messageTypeIds || [MessageTypes.error, MessageTypes.failure];
-  //   const messageTypeId = messageTypeIds.find(o => o === message.messageTypeId);
-  //   if (messageTypeId) {
-  //     return (payload.message);
-  //   } else {
-  //     return (payload.data);
-  //   }
-  // }
   processPayload<T>(payload: IPayload<T>, messageTypeIds?: string[]) {
-    if (!payload.message) {
-        // Handle the case where the message is null or undefined
-        return payload;
-    }
-
+    const message = payload.message;
     messageTypeIds = messageTypeIds || [MessageTypes.error, MessageTypes.failure];
-    const messageTypeId = messageTypeIds.find(o => o === payload.message.messageTypeId);
-
+    const messageTypeId = messageTypeIds.find(o => o === message.messageTypeId);
     if (messageTypeId) {
-        return payload.message;
+      return (payload.message);
     } else {
-        return payload.data;
+      return (payload.data);
     }
-}
+  }
+//   processPayload<T>(payload: IPayload<T>, messageTypeIds?: string[]) {
+//     if (!payload.message) {
+//         // Handle the case where the message is null or undefined
+//         return payload;
+//     }
+
+//     messageTypeIds = messageTypeIds || [MessageTypes.error, MessageTypes.failure];
+//     const messageTypeId = messageTypeIds.find(o => o === payload.message.messageTypeId);
+
+//     if (messageTypeId) {
+//         return payload.message;
+//     } else {
+//         return payload.data;
+//     }
+// }
   service<T>(cb: Observable<{}>): Observable<IPayload<T>> {
     const onFulfilled = (value) => new PayloadMapper().fromObject<T>(value);
     const onRejection = (reason) => new PayloadMapper().fromObject<T>(reason);
