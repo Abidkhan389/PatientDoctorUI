@@ -3,7 +3,7 @@ import jwt_decode from 'jwt-decode';
 import { AuthenticatedUser } from '../interfaces/IAuthenticatedUser';
 import { IJwtToken } from '../interfaces/IJwtToken';
 const APIPaths = {
-    accessTokenKey: 'secpAuth'
+    accessTokenKey: 'EyeCare'
 }
 export class TokenHelper {
 

@@ -27,7 +27,8 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>CNIC:</label>
-                            <input type="text" class="form-control " formControlName="cnic" placeholder="XXXXXXXXXXXXX">
+                            <input type="text" class="form-control " formControlName="cnic"
+                                placeholder="Example@gmail.com">
                             <div *ngIf="form.controls['cnic'].touched && !form.controls['cnic'].valid">
                                 <div *ngFor="let validation of validationMessages.value" class="has-danger">
                                     <span class="form-control-feedback"
@@ -40,8 +41,9 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" formControl="email" placeholder="Example@gmail.com">
+                            <label>Email:</label>
+                            <input type="text" class="form-control " formControlName="email"
+                                placeholder="Example@gmail.com">
                             <div *ngIf="form.controls['email'].touched && !form.controls['email'].valid">
                                 <div *ngFor="let validation of validationMessages.value" class="has-danger">
                                     <span class="form-control-feedback"
@@ -56,8 +58,9 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label>City</label>
-                            <input type="text" class="form-control" formControl="city" placeholder="Search Here">
+                            <label>City :</label>
+                            <input type="text" class="form-control " formControlName="city"
+                                placeholder="Search Here">
                             <div *ngIf="form.controls['city'].touched && !form.controls['city'].valid">
                                 <div *ngFor="let validation of validationMessages.value" class="has-danger">
                                     <span class="form-control-feedback"
@@ -70,8 +73,9 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label>Mobile Number</label>
-                            <input type="text" class="form-control" formControl="mobileNumber" placeholder="Search Here">
+                            <label>Mobile Number :</label>
+                            <input type="text" class="form-control " formControlName="mobileNumber"
+                                placeholder="Search Here">
                             <div *ngIf="form.controls['mobileNumber'].touched && !form.controls['mobileNumber'].valid">
                                 <div *ngFor="let validation of validationMessages.value" class="has-danger">
                                     <span class="form-control-feedback"
@@ -86,7 +90,7 @@
                         <div class="form-group">
                             <label>Status:</label>
                             <select class="form-control" formControlName="status">
-                                <!-- <option value="">Choose one option</option> -->
+                                <option value="">Choose one option</option>
                                 <option value="1">Active</option>
                                 <option value="0">In Active</option>
                             </select>
@@ -144,7 +148,7 @@
                     <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
                     <mat-cell *matCellDef="let user">
                         <button mat-icon-button class="action-button" color="primary"
-                            (click)="ViewCourse(user.userId)">
+                            (click)="ViewUser(user.userId)">
                             <i class="fa fa-eye me-1"></i>
                         </button>
                         <button mat-icon-button color="primary" *ngIf="user.status==1"

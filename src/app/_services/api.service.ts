@@ -30,7 +30,7 @@ export abstract class ApiService implements IBaseService {
     if (messageTypeId) {
       return (payload.message);
     } else {
-      return (payload.data);
+      return (payload);
     }
   }
 //   processPayload<T>(payload: IPayload<T>, messageTypeIds?: string[]) {

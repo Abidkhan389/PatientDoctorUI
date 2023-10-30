@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     })).subscribe((result: any) => {
       if (result.token) {
         TokenHelper.setToken(result.token);
-        localStorage.setItem("userId",result.id);
+        localStorage.setItem("userId",result.user.id);
         this.router.navigateByUrl('/admin')
       }
     });

@@ -19,7 +19,7 @@ export class UserManagementService extends ApiService {
     let onSuccess = (value) => {
       let data = value;
       if (data.totalCount != 0) {
-        return data;
+        return data.data;
       } else {
         showErrorMessage(data.message)
         return false;
@@ -34,7 +34,7 @@ export class UserManagementService extends ApiService {
     let onSuccess = (value) => {
       let data = value;
       if (data) {
-        return data;
+        return data.data;
       } else {
         showErrorMessage(data.message)
         return false;
@@ -72,7 +72,7 @@ export class UserManagementService extends ApiService {
     );
   }
   GetUserById(Id: any) {
-    let params = new HttpParams().set('Id', Id);
+    let params = new HttpParams().set('UserId', Id);
     let onSuccess = (value) => {
       let data = value;
       if (data.success) {

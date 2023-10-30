@@ -85,10 +85,10 @@ export class UsersComponent implements OnInit {
     this.CurrentUserId = Id;
     this.AddEdit(this.CurrentUserId, true);
   }
-   updateStatus(event, course) {
+   updateStatus(event, user) {
     this.loading = false;
     let model = {
-      id: course.courseId,
+      id: user.userId,
       status: event ? 1 : 0
     }
     return this.userManagementService.updateUserStatus(model)
@@ -99,11 +99,11 @@ export class UsersComponent implements OnInit {
       .subscribe(data => {
         if (data.success) {
           showSuccessMessage(data.message)
-          course.status = event
+          user.status = event
         }
         else {
           showErrorMessage(data.message)
-          course.status = !event
+          user.status = !event
         }
       },
         error => {

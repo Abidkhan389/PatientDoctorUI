@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { Messages, NoWhitespaceValidator, Patterns, ResultMessages, showErrorMessage } from 'src/app/_common';
+import { Helpers, Messages, NoWhitespaceValidator, Patterns, ResultMessages, showErrorMessage } from 'src/app/_common';
 import { UserManagementService } from 'src/app/_services/administration/user-management.service';
 
 @Component({
@@ -19,6 +19,7 @@ export class AddEditUserComponent {
   validationMessages = Messages.validation_messages;
   userList: any;
   RolesList: any;
+  hide = true;
   constructor(public userManagementService: UserManagementService, private fb: FormBuilder, protected router: Router, private dialogref: MatDialogRef<AddEditUserComponent>,
     private dilog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.getAllRoles();
@@ -55,6 +56,7 @@ export class AddEditUserComponent {
       .subscribe(result => {
         if (result) {
           this.UserForm.patchValue(result);
+          this.UserForm.get("password").disable();
           if (this.data.IsReadOnly) {
             this.isreadOnly = true;
             this.UserForm.disable();
@@ -69,6 +71,10 @@ export class AddEditUserComponent {
     this.loading = true;
     // this.addEdituser = this.userForm.value;
     let model = Object.assign({}, this.UserForm.getRawValue());
+    // let phn=Helpers.appendPhoneNumber(this.UserForm.get("mobileNumber").value)
+    // if(phn){
+    //   model.mobileNumber = phn;
+    // }
     if (this.data.userId)
       model.Id = this.data.userId
     this.userManagementService.addEditUser(model).subscribe((data: any) => {
@@ -82,10 +88,10 @@ export class AddEditUserComponent {
       firstName: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.titleRegex), Validators.maxLength(20)])],
       lastName: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.titleRegex), Validators.maxLength(20)])],
       password: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.minLength(8), Validators.maxLength(20)])],
-      mobileNumber: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.Num), Validators.minLength(9), Validators.maxLength(9)])],
+      mobileNumber: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.Num), Validators.minLength(11), Validators.maxLength(11)])],
       cnic: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.CnicPattern), Validators.minLength(13), Validators.maxLength(13)])],
       city: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.titleRegex), Validators.maxLength(20)])],
-      roleId: ['', Validators.required],
+      roleId: [null, Validators.required],
     });
   }
   //Its Close The DialogRef Modal
