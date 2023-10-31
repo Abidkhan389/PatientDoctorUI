@@ -4,7 +4,10 @@ import { BaseLayoutComponent } from './Layout/base-layout/base-layout.component'
 import { PagesLayoutComponent } from './Layout/pages-layout/pages-layout.component';
 import { AuthGuard } from './_guard/authGuard';
 import { HomeComponent } from './patient/home/home.component';
-
+import { PermissionGuard } from './_guard/PermissionGuard';
+import { PermissionGuardForReceptionist } from './_guard/PermissionGuardForReceptionist';
+import { RoleGuard } from './_guard/RoleGuard ';
+import { ROLES } from './Models/Guards/ROLES';
 // // Pages
 
 
@@ -12,7 +15,7 @@ import { HomeComponent } from './patient/home/home.component';
 const routes: Routes = [
  {
     path:'',
-    loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
+    loadChildren: () => import('./patient/patient.module').then(p => p.PatientModule)
     
  },
   {
@@ -28,7 +31,28 @@ const routes: Routes = [
       {
         path: 'main',
         loadChildren: () => import('./main/main.module').then(m => m.MainModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, RoleGuard],
+        data: { requiredRoles: [ROLES.Doctor, ROLES.Admin] }
+
+      },
+
+    ]
+  },
+  {
+    path: 'admin/patientappoitment',
+    component: BaseLayoutComponent,
+    runGuardsAndResolvers: 'always',
+    children: [
+      {
+        path: 'appoitment',
+        redirectTo: 'appoitment',
+        pathMatch: 'full'
+      },
+      {
+        path: 'appoitment',
+        loadChildren: () => import('./receptionist/receptionist.module').then(r => r.ReceptionistModule),
+        canActivate: [AuthGuard, RoleGuard],
+        data: { requiredRoles: [ROLES.Doctor, ROLES.Admin,ROLES.Receptionist] }
 
       },
 

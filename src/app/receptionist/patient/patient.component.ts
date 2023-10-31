@@ -1,88 +1,86 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { finalize } from 'rxjs/operators';
-import { Messages, NoWhitespaceValidator, Patterns, ResultMessages, showErrorMessage, showSuccessMessage } from 'src/app/_common';
-import { UserManagementService } from 'src/app/_services/administration/user-management.service';
+import { Messages, NoWhitespaceValidator, ResultMessages, showErrorMessage, showSuccessMessage } from 'src/app/_common';
+import { ReceptionistService } from 'src/app/_services/administration/receptionist.service';
 import { Table } from 'src/app/interfaces/ITable';
-import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { AddeditpatientComponent } from './addeditpatient/addeditpatient.component';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.sass']
+  selector: 'app-patient',
+  templateUrl: './patient.component.html',
+  styleUrls: ['./patient.component.sass']
 })
-export class UsersComponent implements OnInit {
+export class PatientComponent implements OnInit{
   form: FormGroup;
   loading: boolean = true;
-  usersList: any;
-  user: any[] = [];
   modalOptions: NgbModalOptions = {};
   dataSource !: MatTableDataSource<any>;
-  displayedColumns: string[] = ['sn.', 'status', 'userName','email','role','mobileNumber','cnic','city', 'actions'];
+  displayedColumns: string[] = ['sn.', 'status', 'name','doctor','doctorNumber','patientNumber','cnic','city','gender','bloodType','dOB','actions'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   totalUsers = 0;
   pageSize = 5;
   currentPage = 1;
   noData: boolean = false;
-  CurrentUserId: any;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   tableParams: Table;
   @ViewChild('myTable') table: any;
   isCollapsed: boolean = true;
   count: number = 0;
   validationMessages = Messages.validation_messages;
-  constructor(public userManagementService: UserManagementService, private dilog: MatDialog, private fb: FormBuilder, private modalService: NgbModal, protected router: Router) {
+  bloodTypes: string[] = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
+  selectedBloodType: string | null = null;
+  constructor(public receptionistService: ReceptionistService, private dilog: MatDialog, private fb: FormBuilder, private modalService: NgbModal, protected router: Router) {
     this.tableParams = { start: 0, limit: 5, sort: '', order: 'ASC', search: null };
   }
   ngOnInit(): void {
     this.validateForm();
-    this.fetchAllUser();
+    this.fetchAllPatient();
   }
   validateForm() {
     this.form = this.fb.group({
-      userName: ['',Validators.compose([NoWhitespaceValidator])],
-      email: ['',Validators.compose([NoWhitespaceValidator])],
+      patientName: ['',Validators.compose([NoWhitespaceValidator])],
       cnic: ['',Validators.compose([NoWhitespaceValidator,])],
       city: ['',Validators.compose([NoWhitespaceValidator,])],
       mobileNumber: ['',Validators.compose([NoWhitespaceValidator,])],
+      bloodType: ['',Validators.compose([NoWhitespaceValidator,])],
       status: [null]
     })
   }
-   // On Advance Search Submit
-   onSubmit() {
+  // On Advance Search Submit
+  onSubmit() {
     this.noData = false;
     this.tableParams.start = 0;
-    this.fetchAllUser()
+    this.fetchAllPatient()
   }
    // Pagination with server side
    onPaginate(pageEvent: PageEvent) {
     this.tableParams.limit = pageEvent.pageSize
     this.tableParams.start = pageEvent.pageIndex * pageEvent.pageSize
-    this.fetchAllUser()
+    this.fetchAllPatient()
   }
    //Sorting on Coloum With MatSort
    onSort(sort: Sort) {
     this.tableParams.sort = sort.active;
     this.tableParams.order = sort.direction;
     this.tableParams.start = 0;
-    this.fetchAllUser()
+    this.fetchAllPatient()
   }
   //Reset Form Values on Advance Search
   resetTable() {
     this.noData = false;
     this.form.reset();
-    this.fetchAllUser()
+    this.fetchAllPatient()
   }
-  ViewUser(Id: any) {
-    this.CurrentUserId = Id;
-    this.AddEdit(this.CurrentUserId, true);
+  ViewPatient(Id: any) {
+    this.AddEdit(Id, true);
   }
    updateStatus(event, user) {
     this.loading = false;
@@ -90,7 +88,7 @@ export class UsersComponent implements OnInit {
       id: user.userId,
       status: event ? 1 : 0
     }
-    return this.userManagementService.updateUserStatus(model)
+    return this.receptionistService.updatePatientStatus(model)
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -111,11 +109,11 @@ export class UsersComponent implements OnInit {
   }
 
   //Fetching All with sorting or filtering with activeInActive
-  fetchAllUser() {
+  fetchAllPatient() {
     this.loading = true;
     debugger;
     Object.assign(this.tableParams, this.form.value);
-    this.userManagementService.getAllUsers(this.tableParams)
+    this.receptionistService.getAllPatient(this.tableParams)
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -138,7 +136,7 @@ export class UsersComponent implements OnInit {
   }
   //Add Edit With Mat Dialoge Modal Ref
   AddEdit(Id?: any, IsReadOnly?: any) {
-    const dialogref = this.dilog.open(AddEditUserComponent, {
+    const dialogref = this.dilog.open(AddeditpatientComponent, {
       disableClose: true,
       autoFocus: false,
       data: {
@@ -149,7 +147,7 @@ export class UsersComponent implements OnInit {
     dialogref.afterClosed().subscribe({
       next: (value) => {
         if (value) {
-          this.fetchAllUser();
+          this.fetchAllPatient();
         }
       },
     });

@@ -55,7 +55,7 @@ export class UserManagementService extends ApiService {
       map(onSuccess)
     );
   }
-  addEditUser(model: ICourse) {
+  addEditUser(model: any) {
     let onSuccess = (value) => {
       let data = value;
       if (data.success) {

@@ -31,7 +31,7 @@ export class TokenHelper {
     }
     public static parseUserToken(): AuthenticatedUser {
         let token = this.getAccessToken();
-        const user: AuthenticatedUser = { authenticated: false, cultureName: null, displayName: null, email: null, name: null, username: null, roles: [], verified: false, image: null, fullName: null, rights: null, userRightsString: null, campuses: [], businessUnit: null };
+        const user: AuthenticatedUser = { authenticated: false, cultureName: null, displayName: null, email: null, name: null, username: null, roles: [], verified: false, image: null, fullName: null, rights: null, userRightsString: null, campuses: [], businessUnit: null ,role:null};
         try {
             if (token) {
                 const decodedToken: IJwtToken = jwtDecode(token);
@@ -47,7 +47,7 @@ export class TokenHelper {
                 let fullName = decodedToken['FullName'];
                 let userRightsString = decodedToken['Rights'];
                 let businessUnit = decodedToken['BusinessUnit'];
-
+                user.role=roles;
                 user.cultureName = decodedToken['CultureName'];
                 //user.displayName = name ? name[1] : null;
                  if (Array.isArray(name)) {

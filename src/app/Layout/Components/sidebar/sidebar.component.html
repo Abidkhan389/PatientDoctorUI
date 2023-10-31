@@ -24,7 +24,7 @@
                   <div class="vsm-header">Dcotor ADMIN PORTAL</div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="Content">
+              <ngb-panel id="Content" *ngIf="user.role==='Admin' || user.role==='Doctor'">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-rocket"></i>
@@ -52,12 +52,12 @@
                   </div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel>
+              <ngb-panel *ngIf="user.role==='Admin' || user.role==='Doctor'">
                 <ng-template ngbPanelHeader>
                   <div class="vsm-header">User Management</div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="user">
+              <ngb-panel id="user" *ngIf="user.role==='Admin' || user.role==='Doctor'">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-rocket"></i>
@@ -99,8 +99,7 @@
                 <ng-template ngbPanelContent>
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
-                      <button class="vsm-link" routerLink="/Patient/ABC"
-                        [routerLinkActiveOptions]="{exact: true}">
+                      <button class="vsm-link" routerLink="/admin/patientappoitment/appoitment/patientappoitment" [routerLinkActiveOptions]="{exact: true}">
                         <i class="vsm-icon pe-7s-rocket"></i>
                         <span class="vsm-title">Patient</span>
                       </button>

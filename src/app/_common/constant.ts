@@ -11,7 +11,7 @@ export const MessageTypes = {
 
 var baseUrl = environment.baseUrl;
 var accountUrl = baseUrl + 'account/'
-var courseUrl = baseUrl + 'Course/'
+var patientUrl = baseUrl + 'Patient/'
 var attachmentUrl = baseUrl + 'Attachment/';
 
 export const APIPaths = {
@@ -29,13 +29,13 @@ export const APIPaths = {
     addEditUSer: accountUrl + 'AddEditUser',
     getUserById: accountUrl + 'getUserById',
     getAllRoles: accountUrl + 'getAllRoles',
+    getAllDoctors:accountUrl + 'getAllDoctors',
 
-    //-----------Course URLS---------------
-    getAllCourses: courseUrl + 'GetAllByProc',
-    updateCourse: courseUrl + 'ActiveInactive',
-    addEditCourse: courseUrl + 'addEditCourse',
-    getCourseById: courseUrl + 'getCourseById',
-    getAllCategoriesForCourses: courseUrl + 'getAllCategoriesForCourses',
+    //-----------Patient URLS---------------
+    getAllPatient: patientUrl + 'getAllByProc',
+    updatePatient: patientUrl + 'activeInActive',
+    addEditPatient: accountUrl + 'addEditPatient',
+    getPatientById: accountUrl + 'getPatientById',
     
 }
 export const ResultMessages = {

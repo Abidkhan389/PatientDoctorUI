@@ -11,13 +11,13 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label>User Name:</label>
-                            <input type="text" class="form-control " formControlName="userName"
+                            <label>Patient Name:</label>
+                            <input type="text" class="form-control " formControlName="patientName"
                                 placeholder="Search Here">
-                            <div *ngIf="form.controls['userName'].touched && !form.controls['userName'].valid">
+                            <div *ngIf="form.controls['patientName'].touched && !form.controls['patientName'].valid">
                                 <div *ngFor="let validation of validationMessages.value" class="has-danger">
                                     <span class="form-control-feedback"
-                                        *ngIf="form.controls['userName'].hasError(validation.type) ">
+                                        *ngIf="form.controls['patientName'].hasError(validation.type) ">
                                         {{validation.message}}
                                     </span>
                                 </div>
@@ -27,8 +27,7 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>CNIC:</label>
-                            <input type="text" class="form-control " formControlName="cnic"
-                                placeholder="XXXXXXXXXXX">
+                            <input type="text" class="form-control " formControlName="cnic" placeholder="XXXXXXXXXXX">
                             <div *ngIf="form.controls['cnic'].touched && !form.controls['cnic'].valid">
                                 <div *ngFor="let validation of validationMessages.value" class="has-danger">
                                     <span class="form-control-feedback"
@@ -41,13 +40,12 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label>Email:</label>
-                            <input type="text" class="form-control " formControlName="email"
-                                placeholder="Example@gmail.com">
-                            <div *ngIf="form.controls['email'].touched && !form.controls['email'].valid">
+                            <label>City:</label>
+                            <input type="text" class="form-control " formControlName="city" placeholder="Search Here">
+                            <div *ngIf="form.controls['city'].touched && !form.controls['city'].valid">
                                 <div *ngFor="let validation of validationMessages.value" class="has-danger">
                                     <span class="form-control-feedback"
-                                        *ngIf="form.controls['email'].hasError(validation.type) ">
+                                        *ngIf="form.controls['city'].hasError(validation.type) ">
                                         {{validation.message}}
                                     </span>
                                 </div>
@@ -58,13 +56,14 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label>City :</label>
-                            <input type="text" class="form-control " formControlName="city"
-                                placeholder="Search Here">
-                            <div *ngIf="form.controls['city'].touched && !form.controls['city'].valid">
+                            <label>Blood Type :</label>
+                            <ng-select class="font-small-1" [items]="bloodTypes" [clearable]="true" [searchable]="true"
+                                placeholder="Choose One Option" formControlName="bloodType">
+                            </ng-select>
+                            <div *ngIf="form.controls['bloodType'].touched && !form.controls['bloodType'].valid">
                                 <div *ngFor="let validation of validationMessages.value" class="has-danger">
                                     <span class="form-control-feedback"
-                                        *ngIf="form.controls['city'].hasError(validation.type) ">
+                                        *ngIf="form.controls['bloodType'].hasError(validation.type) ">
                                         {{validation.message}}
                                     </span>
                                 </div>
@@ -124,21 +123,21 @@
 </div>
 <div class="material striped">
     <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-    <div class="mat-elevation-z8">
+    <div class="mat-elevation-z8" style="overflow-x: auto;">
         <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)" style=" max-width: 100%;
-            width: 100%;">
+        width: 100%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
             <div class="row">
                 <!-- Hashing -->
                 <ng-container matColumnDef="sn.">
                     <mat-header-cell *matHeaderCellDef> #. </mat-header-cell>
-                    <mat-cell *matCellDef="let user">{{user.serialNo}}</mat-cell>
+                    <mat-cell *matCellDef="let patient">{{patient.serialNo}}</mat-cell>
                 </ng-container>
                 <!-- Status Coloumn -->
                 <ng-container matColumnDef="status" prop="status">
                     <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-                    <mat-cell *matCellDef="let user">
-                        <ui-switch [loading]="loading" [checked]="(user.status == 1 ? true : false)" size="small"
-                            [(ngModel)]="user.status" (change)="updateStatus($event,user)">
+                    <mat-cell *matCellDef="let patient">
+                        <ui-switch [loading]="loading" [checked]="(patient.status == 1 ? true : false)" size="small"
+                            [(ngModel)]="patient.status" (change)="updateStatus($event,patient)">
                             <i class="fa fa-spinner fa-pulse" *ngIf="loading"></i>
                         </ui-switch>
                     </mat-cell>
@@ -146,48 +145,64 @@
                 <!-- Actions Column -->
                 <ng-container matColumnDef="actions">
                     <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-                    <mat-cell *matCellDef="let user">
+                    <mat-cell *matCellDef="let patient">
                         <button mat-icon-button class="action-button" color="primary"
-                            (click)="ViewUser(user.userId)">
+                            (click)="ViewPatient(patient.patientId)">
                             <i class="fa fa-eye me-1"></i>
                         </button>
-                        <button mat-icon-button color="primary" *ngIf="user.status==1"
-                            (click)="AddEdit(user.userId)">
+                        <button mat-icon-button color="primary" *ngIf="patient.status==1"
+                            (click)="AddEdit(patient.patientId)">
                             <i class="fa fa-edit me-1"></i>
                         </button>
                     </mat-cell>
 
                 </ng-container>
                 <!-- Name Column -->
-                <ng-container matColumnDef="userName">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name </mat-header-cell>
-                    <mat-cell *matCellDef="let user"> {{user.userName}} </mat-cell>
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Patient Name</mat-header-cell>
+                    <mat-cell *matCellDef="let patient"> {{patient.fullName}} </mat-cell>
                 </ng-container>
-                 <!-- Email Column -->
-                 <ng-container matColumnDef="email">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                    <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+                <!-- doctor Name Column -->
+                <ng-container matColumnDef="doctor">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</mat-header-cell>
+                    <mat-cell *matCellDef="let patient"> {{patient.doctorName}} </mat-cell>
                 </ng-container>
-                 <!-- Role Column -->
-                 <ng-container matColumnDef="role">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
-                    <mat-cell *matCellDef="let user"> {{user.roleName}} </mat-cell>
+                <!-- doctorNumber Column -->
+                <ng-container matColumnDef="doctorNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Number</mat-header-cell>
+                    <mat-cell *matCellDef="let patient"> {{patient.doctorPhoneNumber}} </mat-cell>
                 </ng-container>
-                <!-- mobileNumber Column -->
-                <ng-container matColumnDef="mobileNumber">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile Number</mat-header-cell>
-                    <mat-cell *matCellDef="let user"> {{user.mobileNumber}} </mat-cell>
+                <!-- patientNumber Column -->
+                <ng-container matColumnDef="patientNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Patient Number</mat-header-cell>
+                    <mat-cell *matCellDef="let patient"> {{patient.patientPhoneNumber}} </mat-cell>
                 </ng-container>
                 <!-- cnic Column -->
                 <ng-container matColumnDef="cnic">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>CNIC</mat-header-cell>
-                    <mat-cell *matCellDef="let user"> {{user.cnic}} </mat-cell>
+                    <mat-cell *matCellDef="let patient"> {{patient.cnic}} </mat-cell>
                 </ng-container>
                 <!-- city Column -->
                 <ng-container matColumnDef="city">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
-                    <mat-cell *matCellDef="let user"> {{user.city}} </mat-cell>
+                    <mat-cell *matCellDef="let patient"> {{patient.city}} </mat-cell>
                 </ng-container>
+                <!-- gender Column -->
+                <ng-container matColumnDef="gender">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Gender</mat-header-cell>
+                    <mat-cell *matCellDef="let patient"> {{patient.gender}} </mat-cell>
+                </ng-container>
+                <!-- bloodType Column -->
+                <ng-container matColumnDef="bloodType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Blood Type</mat-header-cell>
+                    <mat-cell *matCellDef="let patient"> {{patient.bloodType}} </mat-cell>
+                </ng-container>
+                <!-- dOB Column -->
+                <ng-container matColumnDef="dOB">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>DOB</mat-header-cell>
+                    <mat-cell *matCellDef="let patient"> {{patient.dateofBirth}} </mat-cell>
+                </ng-container>
+                
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </div>
@@ -200,3 +215,27 @@
         </mat-paginator>
     </div>
 </div>
+<!-- Add this style to your table to enable horizontal scrolling -->
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+
+    thead {
+        background-color: #f5f5f5;
+    }
+
+    tbody {
+        background-color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>

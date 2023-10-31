@@ -15,22 +15,22 @@ export class LookupService extends ApiService {
 }
 
 //Get All Categories with name and id for dropdown
-getAllCategoriesForCourses()
-{
-  let onSuccess = (value) => {
-    let data = value;
-    if (data.success) {
-      return data.data;
-    } else {
-      showErrorMessage(data.message)
-      return false;
-    }
-  };
-  return this.service(this.get(APIPaths.getAllCategoriesForCourses)).pipe(
-    map(value => this.processPayload(value)),
-    map(onSuccess)
-  );
-}
+// getAllCategoriesForCourses()
+// {
+//   let onSuccess = (value) => {
+//     let data = value;
+//     if (data.success) {
+//       return data.data;
+//     } else {
+//       showErrorMessage(data.message)
+//       return false;
+//     }
+//   };
+//   return this.service(this.get(APIPaths.getAllCategoriesForCourses)).pipe(
+//     map(value => this.processPayload(value)),
+//     map(onSuccess)
+//   );
+// }
 
 // GetAllLecturesByCourseId(val) {
 //   let params = new HttpParams().set('Id', val);

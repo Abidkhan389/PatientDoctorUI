@@ -17,6 +17,7 @@ export interface AuthenticatedUser {
     userRightsString: string;
     campuses: any[];
     businessUnit:string;
+    role:any;
 }
 export interface UserRights {
     BusinessUnit: General;

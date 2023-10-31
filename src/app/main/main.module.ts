@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
-import { CoursesComponent } from './courses/courses.component';
-import { AddeditcoursesComponent } from './courses/addeditcourses/addeditcourses.component';
 import { ShareModule } from '../-share/-share.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -14,8 +12,6 @@ import { AddEditUserComponent } from './users/add-edit-user/add-edit-user.compon
 @NgModule({
     declarations: [
         MainComponent,
-        CoursesComponent,
-        AddeditcoursesComponent,
         UsersComponent,
         AddEditUserComponent,
     ],

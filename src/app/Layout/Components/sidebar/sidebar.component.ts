@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PerfectScrollbarConfigInterface,
   PerfectScrollbarComponent, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
+import { TokenHelper } from 'src/app/_common';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,7 +13,7 @@ import { PerfectScrollbarConfigInterface,
 })
 export class SidebarComponent implements OnInit {
   public extraParameter: any;
-
+  user=TokenHelper.getUserName()
   constructor(public globals: ThemeOptions, private activatedRoute: ActivatedRoute) {
 
   }
