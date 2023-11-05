@@ -1,1 +1,175 @@
-<p>addeditpatient works!</p>
+<div class="modal-header mb-0 p-3">
+    <h4 class="modal-title text-bold-500 font-medium-1">{{data.IsReadOnly? "View" : (data.patientId? "Edit Patient" :"Add Patient")}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeClick()">
+    </button>
+</div>
+<form [formGroup]="PatientForm" (ngSubmit)="AddEdit()" class="form-container ">
+    <div class="modal-body " style="max-height: 70vh; ">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12  col-12 text-center">
+                <mat-form-field appearance="outline" style="display: block;">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName" placeholder="XYZ">
+                    <mat-error
+                        *ngIf="PatientForm.controls['firstName'].touched && !PatientForm.controls['firstName'].valid">
+                        <mat-error *ngFor="let validation of validationMessages.value">
+                            <mat-error *ngIf="PatientForm.controls['firstName'].hasError(validation.type) ">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12  col-12 text-center">
+                <mat-form-field appearance="outline" style="display: block;">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName" placeholder="XYZ">
+                    <mat-error
+                        *ngIf="PatientForm.controls['lastName'].touched && !PatientForm.controls['lastName'].valid">
+                        <mat-error *ngFor="let validation of validationMessages.value">
+                            <mat-error *ngIf="PatientForm.controls['lastName'].hasError(validation.type) ">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 36.89px;">
+            <div class="col-lg-6 col-md-6 col-sm-12  col-12 text-center">
+                <!-- <label [ngStyle]="{color: isreadOnly? 'grey': 'black' }">Select Gender</label> -->
+                <ng-select class="font-small-1" [items]="genderType" bindLabel="name" bindValue="id"
+                    placeholder="Select Gender" formControlName="gender">
+                </ng-select>
+                <div *ngIf="PatientForm.controls['gender'].touched && !PatientForm.controls['gender'].valid">
+                    <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                        <span class="form-control-feedback"
+                            *ngIf="PatientForm.controls['gender'].hasError(validation.type) ">
+                            {{validation.message}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12  col-12 text-center">
+                <!-- <label [ngStyle]="{color: isreadOnly? 'grey': 'black' }"></label> -->
+                <ng-select class="font-small-1" [items]="DoctorList" bindLabel="userName" bindValue="id"
+                    placeholder="Select Doctor" formControlName="doctoerId">
+                </ng-select>
+                <div *ngIf="PatientForm.controls['doctoerId'].touched && !PatientForm.controls['doctoerId'].valid">
+                    <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                        <span class="form-control-feedback"
+                            *ngIf="PatientForm.controls['doctoerId'].hasError(validation.type) ">
+                            {{validation.message}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12  col-12 text-center">
+                <mat-form-field color="accent" appearance="outline" style="display: block;">
+                    <mat-label>DOB</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dateofBirth"  [max]="maxDate" placeholder="MM/DD/YYYY">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"
+                        style="position: absolute; margin:-30px; line-height: 2px;"></mat-datepicker-toggle>
+                    <mat-datepicker #picker color="primary"></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12  col-12 text-center">
+                <mat-form-field color="accent" appearance="outline" style="display: block;">
+                    <mat-label>Appoitment Time</mat-label>
+                    <input matInput  [ngxMatDatetimePicker]="picker1" placeholder="Choose a date"   formControlName="appoitmentTime"
+                        [min]="minDate" >
+                    <mat-datepicker-toggle matSuffix [for]="picker1" class="ngxdatetimestyle" ></mat-datepicker-toggle>
+                    <ngx-mat-datetime-picker  #picker1 [showSpinners]="showSpinners" 
+                     [showSeconds]="showSeconds" style="position: absolute; margin:10px; line-height: 2px;"
+                       [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+                       [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" 
+                       >
+                    </ngx-mat-datetime-picker>
+                 </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center">
+                <mat-form-field appearance="outline" style="display: block;">
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput formControlName="phoneNumber" placeholder="03">
+                    <mat-error
+                        *ngIf="PatientForm.controls['phoneNumber'].touched && !PatientForm.controls['phoneNumber'].valid">
+                        <mat-error *ngFor="let validation of validationMessages.phoneNumber">
+                            <mat-error *ngIf="PatientForm.controls['phoneNumber'].hasError(validation.type) ">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12  col-12 text-center">
+                <mat-form-field appearance="outline" style="display: block;">
+                    <mat-label>Cnic</mat-label>
+                    <input matInput formControlName="cnic" placeholder="XXX">
+                    <mat-error *ngIf="PatientForm.controls['cnic'].touched && !PatientForm.controls['cnic'].valid">
+                        <mat-error *ngFor="let validation of validationMessages.cnic">
+                            <mat-error *ngIf="PatientForm.controls['cnic'].hasError(validation.type) ">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12  col-12 text-center">
+                <mat-form-field appearance="outline" style="display: block;">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city" placeholder="XYZ">
+                    <mat-error *ngIf="PatientForm.controls['city'].touched && !PatientForm.controls['city'].valid">
+                        <mat-error *ngFor="let validation of validationMessages.value">
+                            <mat-error *ngIf="PatientForm.controls['city'].hasError(validation.type) ">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12  col-12 text-center">
+                <!-- <label [ngStyle]="{color: isreadOnly? 'grey': 'black' }">Select Blood Type</label> -->
+                <ng-select class="font-small-1" [items]="bloodTypes" [clearable]="true" [searchable]="true"
+                    placeholder="Select Blood Type" formControlName="bloodType">
+                </ng-select>
+                <div *ngIf="PatientForm.controls['bloodType'].touched && !PatientForm.controls['bloodType'].valid">
+                    <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                        <span class="form-control-feedback"
+                            *ngIf="PatientForm.controls['bloodType'].hasError(validation.type) ">
+                            {{validation.message}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12  col-12 text-center">
+                <!-- <label [ngStyle]="{color: isreadOnly? 'grey': 'black' }"></label> -->
+                <ng-select class="font-small-1" [items]="materialType" [clearable]="true" [searchable]="true" bindLabel="name" bindValue="id"
+                    placeholder="Select Material Status" formControlName="maritalStatus">
+                </ng-select>
+                <div *ngIf="PatientForm.controls['maritalStatus'].touched && !PatientForm.controls['maritalStatus'].valid">
+                    <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                        <span class="form-control-feedback"
+                            *ngIf="PatientForm.controls['maritalStatus'].hasError(validation.type) ">
+                            {{validation.message}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div class="modal-footer mb-0 p-2 ">
+        <button class="btn btn-raised btn-secondary me-1 " type="button" [disabled]="loading" (click)="closeClick()">
+            <i class="fa fa-close"></i> Cancel
+        </button>
+        <button class="btn btn-raised btn-primary" type="submit" [disabled]="!PatientForm.valid || loading"
+            [ngClass]="{'m-loader m-loader--right m-loader--info': loading}">
+            <i class="fa fa-check-square-o"></i>{{data.IsReadOnly? "View" :data.userId?"Update":"Add"}}
+        </button>
+    </div>
+</form>

@@ -25,3 +25,12 @@ export enum QuestionLevel {
     D = "D",
     F = "F",
   }
+  export enum Gendertype{
+    Male= "Male",
+    Female= "Female",
+    Other = "Other",
+  }
+  export enum MaterialType {
+    Married= "Married",
+    Single= "Single",
+  }

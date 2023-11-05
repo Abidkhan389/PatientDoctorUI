@@ -22,7 +22,7 @@ export class PatientComponent implements OnInit{
   loading: boolean = true;
   modalOptions: NgbModalOptions = {};
   dataSource !: MatTableDataSource<any>;
-  displayedColumns: string[] = ['sn.', 'status', 'name','doctor','doctorNumber','patientNumber','cnic','city','gender','bloodType','dOB','actions'];
+  displayedColumns: string[] = ['sn.', 'status', 'name','doctor','doctorNumber','patientNumber','cnic','city','gender','bloodType','appointment','actions'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   totalUsers = 0;
@@ -61,7 +61,7 @@ export class PatientComponent implements OnInit{
     this.fetchAllPatient()
   }
    // Pagination with server side
-   onPaginate(pageEvent: PageEvent) {
+  pageChanged(pageEvent: PageEvent) {
     this.tableParams.limit = pageEvent.pageSize
     this.tableParams.start = pageEvent.pageIndex * pageEvent.pageSize
     this.fetchAllPatient()
@@ -140,7 +140,7 @@ export class PatientComponent implements OnInit{
       disableClose: true,
       autoFocus: false,
       data: {
-        userId: Id,
+        patientId: Id,
         IsReadOnly: IsReadOnly
       },
     })

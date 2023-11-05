@@ -198,9 +198,9 @@
                     <mat-cell *matCellDef="let patient"> {{patient.bloodType}} </mat-cell>
                 </ng-container>
                 <!-- dOB Column -->
-                <ng-container matColumnDef="dOB">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>DOB</mat-header-cell>
-                    <mat-cell *matCellDef="let patient"> {{patient.dateofBirth}} </mat-cell>
+                <ng-container matColumnDef="appointment">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Appointment</mat-header-cell>
+                    <mat-cell *matCellDef="let patient"> {{patient.appointmentTime}} </mat-cell>
                 </ng-container>
                 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -210,32 +210,8 @@
         <div *ngIf="noData">
             <p style="text-align: center;margin-top: 15px;">No Data Found.</p>
         </div>
-        <mat-paginator [length]="count" (page)="onPaginate($event)" showFirstLastButtons
+        <mat-paginator [length]="count" (page)="pageChanged($event)" showFirstLastButtons
             [pageSizeOptions]="[5,10, 100, 200]">
         </mat-paginator>
     </div>
 </div>
-<!-- Add this style to your table to enable horizontal scrolling -->
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 8px;
-        text-align: left;
-    }
-
-    thead {
-        background-color: #f5f5f5;
-    }
-
-    tbody {
-        background-color: #fff;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-</style>

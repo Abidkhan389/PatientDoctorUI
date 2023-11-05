@@ -299,14 +299,14 @@ input.mat-mdc-input-element {
 .ng-select.ng-select-disabled>.ng-select-container {
   background-color: white;
   color: grey !important;
-  cursor: no-drop;
+  cursor: no-drop !important;
 }
 
 /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-input-element:disabled,
 .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
   color: grey !important;
-  cursor: no-drop;
+  cursor: no-drop !important;
 }
 
 /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
@@ -457,3 +457,78 @@ input.mat-mdc-input-element {
     text-overflow: ellipsis;
   }
 }
+.mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+  padding-right: 8px !important;
+}
+//change the size of mat input form field box
+.mat-mdc-text-field-wrapper {
+  height: 40px !important;
+  flex: auto;
+}
+
+// .mat-mdc-form-field-subscript-wrapper {
+//   margin-top: 4px;
+// }
+// .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
+//   line-height: normal;
+//   pointer-events: all;
+//   padding-bottom: 15px;
+// }
+
+.action-button i.fa-eye {
+  font-size: 20px; /* Adjust the size as needed */
+}
+.mat-icon-button i.fa-edit {
+  font-size: 16px; /* Adjust the size as needed */
+}
+.ng-select.ng-select-single .ng-select-container {
+  height: 40px !important;
+}
+.mdc-text-field--outlined {
+  outline-offset: 0px;
+}
+/* Border Color  of ng select*/
+.ng-select.ng-invalid.ng-touched .ng-select-container{
+  border-color: red;
+}
+.ngxdatetimestyle
+{
+  margin: -18px !important;
+  // margin-top: -14px !important;
+}
+
+example-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+

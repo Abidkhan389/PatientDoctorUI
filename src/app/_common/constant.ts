@@ -34,8 +34,8 @@ export const APIPaths = {
     //-----------Patient URLS---------------
     getAllPatient: patientUrl + 'getAllByProc',
     updatePatient: patientUrl + 'activeInActive',
-    addEditPatient: accountUrl + 'addEditPatient',
-    getPatientById: accountUrl + 'getPatientById',
+    addEditPatient: patientUrl + 'addEditPatient',
+    getPatientById: patientUrl + 'getPatientById',
     
 }
 export const ResultMessages = {

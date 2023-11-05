@@ -27,9 +27,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-
-
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule, } from '@angular-material-components/datetime-picker';
 @NgModule({
   declarations: [
     FileUploadComponent,
@@ -70,7 +70,12 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     AgmCoreModule,
     FileSizePipe,
     ParseJsonPipe ,
-    HrefPreventDefaultDirective
+    MatDatepickerModule,
+    MatNativeDateModule,
+    HrefPreventDefaultDirective,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+     NgxMatNativeDateModule,
   ],
    providers: [
         DataService,
