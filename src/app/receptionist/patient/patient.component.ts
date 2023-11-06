@@ -7,17 +7,19 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { finalize } from 'rxjs/operators';
-import { Messages, NoWhitespaceValidator, ResultMessages, showErrorMessage, showSuccessMessage } from 'src/app/_common';
+import { DropDownUtils, Messages, NoWhitespaceValidator, ResultMessages, showErrorMessage, showSuccessMessage } from 'src/app/_common';
 import { ReceptionistService } from 'src/app/_services/administration/receptionist.service';
 import { Table } from 'src/app/interfaces/ITable';
 import { AddeditpatientComponent } from './addeditpatient/addeditpatient.component';
+import { LookupService } from 'src/app/_services/lookup.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-patient',
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.sass']
 })
-export class PatientComponent implements OnInit{
+export class PatientComponent extends DropDownUtils implements OnInit{
   form: FormGroup;
   loading: boolean = true;
   modalOptions: NgbModalOptions = {};
@@ -37,21 +39,39 @@ export class PatientComponent implements OnInit{
   validationMessages = Messages.validation_messages;
   bloodTypes: string[] = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
   selectedBloodType: string | null = null;
-  constructor(public receptionistService: ReceptionistService, private dilog: MatDialog, private fb: FormBuilder, private modalService: NgbModal, protected router: Router) {
+  DoctorList: any;
+  // Configuration options
+  showSpinners = true; // Show spinners for hours, minutes, and seconds
+  showSeconds = true; // Show seconds
+  stepHour = 1; // Step value for hours
+  stepMinute = 1; // Step value for minutes
+  stepSecond = 1; // Step value for seconds
+  touchUi = false; // Use touch-friendly UI
+  color = 'primary'; // Color of the datetime picker
+  enableMeridian = true; // Enable AM/PM selection
+  maxDate =moment(new Date()).format('YYYY-MM-DD')
+  inputFocused = false;
+  inputClicked: boolean = false;
+  constructor(public receptionistService: ReceptionistService,protected lookupService: LookupService, private dilog: MatDialog, private fb: FormBuilder, private modalService: NgbModal, protected router: Router) {
+    super(lookupService, router);
+    this.GetAllDoctor(data => (this.DoctorList = data));
+    
     this.tableParams = { start: 0, limit: 5, sort: '', order: 'ASC', search: null };
   }
   ngOnInit(): void {
     this.validateForm();
     this.fetchAllPatient();
   }
+ 
   validateForm() {
     this.form = this.fb.group({
       patientName: ['',Validators.compose([NoWhitespaceValidator])],
       cnic: ['',Validators.compose([NoWhitespaceValidator,])],
       city: ['',Validators.compose([NoWhitespaceValidator,])],
       mobileNumber: ['',Validators.compose([NoWhitespaceValidator,])],
-      bloodType: ['',Validators.compose([NoWhitespaceValidator,])],
-      status: [null]
+      doctorId: ['',Validators.compose([NoWhitespaceValidator,])],
+      //patientAppoitmentTime: ['',Validators.compose([NoWhitespaceValidator,])],
+      
     })
   }
   // On Advance Search Submit

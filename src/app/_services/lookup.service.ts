@@ -13,7 +13,21 @@ export class LookupService extends ApiService {
   constructor(public httpClient: HttpClient) {
     super(httpClient);
 }
-
+getAllDoctors() {
+  let onSuccess = (value) => {
+    let data = value;
+    if (data) {
+      return data.data;
+    } else {
+      showErrorMessage(data.message)
+      return false;
+    }
+  };
+  return this.service(this.get(APIPaths.getAllDoctors)).pipe(
+    map(value => this.processPayload(value)),
+    map(onSuccess)
+  );
+}
 //Get All Categories with name and id for dropdown
 // getAllCategoriesForCourses()
 // {

@@ -53,12 +53,12 @@
             <div class="col-lg-6 col-md-6 col-sm-12  col-12 text-center">
                 <!-- <label [ngStyle]="{color: isreadOnly? 'grey': 'black' }"></label> -->
                 <ng-select class="font-small-1" [items]="DoctorList" bindLabel="userName" bindValue="id"
-                    placeholder="Select Doctor" formControlName="doctoerId">
+                    placeholder="Select Doctor" formControlName="doctorId">
                 </ng-select>
-                <div *ngIf="PatientForm.controls['doctoerId'].touched && !PatientForm.controls['doctoerId'].valid">
+                <div *ngIf="PatientForm.controls['doctorId'].touched && !PatientForm.controls['doctorId'].valid">
                     <div *ngFor="let validation of validationMessages.value" class="has-danger">
                         <span class="form-control-feedback"
-                            *ngIf="PatientForm.controls['doctoerId'].hasError(validation.type) ">
+                            *ngIf="PatientForm.controls['doctorId'].hasError(validation.type) ">
                             {{validation.message}}
                         </span>
                     </div>
@@ -169,7 +169,7 @@
         </button>
         <button class="btn btn-raised btn-primary" type="submit" [disabled]="!PatientForm.valid || loading"
             [ngClass]="{'m-loader m-loader--right m-loader--info': loading}">
-            <i class="fa fa-check-square-o"></i>{{data.IsReadOnly? "View" :data.userId?"Update":"Add"}}
+            <i class="fa fa-check-square-o"></i>{{data.IsReadOnly? "View" :data.patientId?"Update":"Add"}}
         </button>
     </div>
 </form>

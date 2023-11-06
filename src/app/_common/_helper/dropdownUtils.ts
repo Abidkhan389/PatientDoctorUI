@@ -27,17 +27,17 @@ export class DropDownUtils {
     //                 showErrorMessage(ResultMessages.serverError)
     //             });
     // }
-    // protected GetAllCategory(callback: (data) => void) {
-    //     this.lookupService.getAllCategoriesForCourses()
-    //         .subscribe(
-    //             result => {
-    //                 if (result)
-    //                     callback(result);
-    //             },
-    //             error => {
-    //                 showErrorMessage(ResultMessages.serverError)
-    //             });
-    // }
+    protected GetAllDoctor(callback: (data) => void) {
+        this.lookupService.getAllDoctors()
+            .subscribe(
+                result => {
+                    if (result)
+                        callback(result);
+                },
+                error => {
+                    showErrorMessage(ResultMessages.serverError)
+                });
+    }
 
     // protected getAllLecturesDDLByCourseId(val,callback: (data) => void) {
     //     this.lookupService.GetAllLecturesByCourseId(val)

@@ -56,14 +56,14 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label>Blood Type :</label>
-                            <ng-select class="font-small-1" [items]="bloodTypes" [clearable]="true" [searchable]="true"
-                                placeholder="Choose One Option" formControlName="bloodType">
+                            <label>Doctor :</label>
+                            <ng-select class="font-small-1" [items]="DoctorList" bindLabel="userName" bindValue="id"
+                                placeholder="Select Doctor" formControlName="doctorId">
                             </ng-select>
-                            <div *ngIf="form.controls['bloodType'].touched && !form.controls['bloodType'].valid">
+                            <div *ngIf="form.controls['doctorId'].touched && !form.controls['doctorId'].valid">
                                 <div *ngFor="let validation of validationMessages.value" class="has-danger">
                                     <span class="form-control-feedback"
-                                        *ngIf="form.controls['bloodType'].hasError(validation.type) ">
+                                        *ngIf="form.controls['doctorId'].hasError(validation.type) ">
                                         {{validation.message}}
                                     </span>
                                 </div>
@@ -85,16 +85,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <!-- <div class="col-lg-3">
                         <div class="form-group">
-                            <label>Status:</label>
-                            <select class="form-control" formControlName="status">
-                                <option value="">Choose one option</option>
-                                <option value="1">Active</option>
-                                <option value="0">In Active</option>
-                            </select>
+                          <label>Appointment:</label>
+                          <mat-form-field appearance="outline" style="display: block;" class="custom-form-field" (click)="inputClicked = true" (blur)="inputClicked = false">
+                            <input matInput [matDatepicker]="picker" formControlName="patientAppoitmentTime"
+                              [max]="maxDate" placeholder="MM/DD/YYYY">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"
+                              style="position: absolute; margin: -30px; line-height: 2px;"></mat-datepicker-toggle>
+                            <mat-datepicker #picker color="primary"></mat-datepicker>
+                          </mat-form-field>
                         </div>
-                    </div>
+                      </div>                       -->
+                      
                 </div>
                 <div class="row ">
                     <div class="col-lg-12">
@@ -202,7 +205,7 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Appointment</mat-header-cell>
                     <mat-cell *matCellDef="let patient"> {{patient.appointmentTime}} </mat-cell>
                 </ng-container>
-                
+
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </div>

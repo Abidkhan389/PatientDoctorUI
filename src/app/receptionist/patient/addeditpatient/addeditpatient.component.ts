@@ -5,16 +5,17 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { finalize } from 'rxjs/operators';
-import { Helpers, Messages, NoWhitespaceValidator, Patterns, ResultMessages, showErrorMessage } from 'src/app/_common';
+import { DropDownUtils, Helpers, Messages, NoWhitespaceValidator, Patterns, ResultMessages, showErrorMessage } from 'src/app/_common';
 import { Gendertype, MaterialType } from 'src/app/_common/_helper/enum';
 import { ReceptionistService } from 'src/app/_services/administration/receptionist.service';
+import { LookupService } from 'src/app/_services/lookup.service';
 
 @Component({
   selector: 'app-addeditpatient',
   templateUrl: './addeditpatient.component.html',
   styleUrls: ['./addeditpatient.component.sass']
 })
-export class AddeditpatientComponent implements OnInit{
+export class AddeditpatientComponent extends DropDownUtils  implements OnInit{
   isreadOnly: boolean = false;
   PatientForm: FormGroup;
   loading: any;
@@ -36,9 +37,12 @@ export class AddeditpatientComponent implements OnInit{
    enableMeridian = true; // Enable AM/PM selection
   minDate = moment().format('YYYY-MM-DDTHH:mm:ss');
   maxDate =moment(new Date()).format('YYYY-MM-DD')
-  constructor(public receptionistService: ReceptionistService, private fb: FormBuilder, protected router: Router, private dialogref: MatDialogRef<AddeditpatientComponent>,
+  constructor(public receptionistService: ReceptionistService,protected lookupService: LookupService, private fb: FormBuilder, protected router: Router, private dialogref: MatDialogRef<AddeditpatientComponent>,
     private dilog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.getAllDoctor();
+      super(lookupService, router);
+      // this.getAllDoctor();
+    this.GetAllDoctor(data => (this.DoctorList = data));
+
     this.genderType = Helpers.enumStringToArray(Gendertype);
     this.materialType = Helpers.enumStringToArray(MaterialType);
     
@@ -54,7 +58,7 @@ export class AddeditpatientComponent implements OnInit{
       firstName: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.titleRegex), Validators.maxLength(30),Validators.minLength(3)])],
       lastName: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.titleRegex), Validators.maxLength(30),Validators.minLength(3)])],
       gender: [null, Validators.required],
-      doctoerId : [null, Validators.required],
+      doctorId : [null, Validators.required],
       dateofBirth : ['', Validators.required],
       appoitmentTime : ['', Validators.required],
       phoneNumber: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.Num), Validators.minLength(11), Validators.maxLength(11)])],
@@ -83,21 +87,21 @@ export class AddeditpatientComponent implements OnInit{
           showErrorMessage(ResultMessages.serverError);
         });
   }
-  getAllDoctor(){
-    this.loading = true;
-    this.receptionistService.getAllDoctors().pipe(
-      finalize(() => {
-        this.loading = false;
-      }))
-      .subscribe(result => {
-        if (result) {
-          this.DoctorList = result;
-        }
-      },
-        error => {
-          showErrorMessage(ResultMessages.serverError);
-        });
-  }
+  // getAllDoctor(){
+  //   this.loading = true;
+  //   this.receptionistService.getAllDoctors().pipe(
+  //     finalize(() => {
+  //       this.loading = false;
+  //     }))
+  //     .subscribe(result => {
+  //       if (result) {
+  //         this.DoctorList = result;
+  //       }
+  //     },
+  //       error => {
+  //         showErrorMessage(ResultMessages.serverError);
+  //       });
+  // }
   AddEdit(){
     this.loading = true;
     // this.addEdituser = this.userForm.value;

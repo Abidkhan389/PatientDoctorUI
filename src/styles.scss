@@ -523,6 +523,14 @@ input.example-right-align {
 .example-full-width {
   width: 100%;
 }
+.custom-form-field {
+  border-color: blue; /* Initial outline color */
+}
+
+.custom-form-field.clicked {
+  border-color: offwhite; /* Change outline color when clicked */
+}
+
 
 
 
