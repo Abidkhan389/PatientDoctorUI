@@ -11,8 +11,9 @@ export const MessageTypes = {
 
 var baseUrl = environment.baseUrl;
 var accountUrl = baseUrl + 'account/'
-var patientUrl = baseUrl + 'Patient/'
+var patientUrl = baseUrl + 'atient/'
 var attachmentUrl = baseUrl + 'Attachment/';
+var DashboardUrl=baseUrl+'dashboard';
 
 export const APIPaths = {
 
@@ -36,7 +37,8 @@ export const APIPaths = {
     updatePatient: patientUrl + 'activeInActive',
     addEditPatient: patientUrl + 'addEditPatient',
     getPatientById: patientUrl + 'getPatientById',
-    
+    //-----------Dashboard URLS---------------
+    getDashboarddata:DashboardUrl+'/GetOverViewForAdminDashboard',
 }
 export const ResultMessages = {
     serverError: "Internal Server Error",

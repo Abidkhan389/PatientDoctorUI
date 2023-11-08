@@ -30,6 +30,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule, } from '@angular-material-components/datetime-picker';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [
     FileUploadComponent,
@@ -75,7 +76,8 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateMod
     HrefPreventDefaultDirective,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
-     NgxMatNativeDateModule,
+    NgxMatNativeDateModule,
+    NgxChartsModule
   ],
    providers: [
         DataService,

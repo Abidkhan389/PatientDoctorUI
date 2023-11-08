@@ -24,7 +24,7 @@
                   <div class="vsm-header">Dcotor ADMIN PORTAL</div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="Content" *ngIf="user.role==='Admin' || user.role==='Doctor'">
+              <ngb-panel id="Content">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-rocket"></i>
@@ -52,7 +52,7 @@
                   </div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel *ngIf="user.role==='Admin' || user.role==='Doctor'">
+              <ngb-panel>
                 <ng-template ngbPanelHeader>
                   <div class="vsm-header">User Management</div>
                 </ng-template>
@@ -80,7 +80,19 @@
                   </div>
                 </ng-template>
               </ngb-panel>
-
+              <ngb-panel>
+                <ng-template ngbPanelHeader>
+                  <div class="vsm-header">Dashboard</div>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="dashboards">
+                <ng-template ngbPanelHeader>
+                  <button class="vsm-link" routerLink="/admin/main/Dashboard" [routerLinkActiveOptions]="{exact: true}">
+                    <i class="vsm-icon pe-7s-rocket"></i>
+                    <span class="vsm-title">Dashboard</span>
+                  </button>
+                </ng-template>
+              </ngb-panel>
 
 
               <ngb-panel>
