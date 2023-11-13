@@ -11,7 +11,7 @@ export const MessageTypes = {
 
 var baseUrl = environment.baseUrl;
 var accountUrl = baseUrl + 'account/'
-var patientUrl = baseUrl + 'atient/'
+var patientUrl = baseUrl + 'patient/'
 var attachmentUrl = baseUrl + 'Attachment/';
 var DashboardUrl=baseUrl+'dashboard';
 

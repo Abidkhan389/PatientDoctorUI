@@ -11,13 +11,14 @@ export class DashboardComponent {
   loading:boolean=true;
   dashboarddata:any;
   public barChartOptionsForAdmins: any; // Initialize as undefined
-  public barChartOptionsForDoctors: any; // Initialize as undefined
   public barChartLabels: string[] =[];
   public barChartType: string = 'bar';
   public barChartLegend: boolean = true;
   public barChartDataForDoctors: number[] = [0,10,20,100,200];
-  // For users
-  public barChartLabelsforUsers: any; // Initialize as undefined
+  // For Doctors
+  public barChartLabelsforDoctors: any; // Initialize as undefined
+  public barChartOptionsForDoctors: any; // Initialize as undefined
+  
   constructor(private dashboardService:DashboardService){
   }
   ngOnInit(): void {
@@ -34,7 +35,9 @@ export class DashboardComponent {
      if (result) {
        this.dashboarddata=result;
        //this.barChartcourseData=this.allCourses.map(course=> course.enrollmentCount);
-       this.barChartDataForDoctors=this.dashboarddata.patientPerDoctorCount.map(doctor=> doctor.PatientCount);
+       this.barChartLabelsforDoctors=this.dashboarddata.patientPerDoctorCount.map(user=> user.doctorName);
+
+       this.barChartDataForDoctors=this.dashboarddata.patientPerDoctorCount.map(doctor=> doctor.patientCount);
        this.initializeBarChartOptions(); // Call the method to set barChartOptions
      }
    });
