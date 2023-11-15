@@ -60,7 +60,9 @@
               <ngb-panel id="user" *ngIf="user.role==='Admin' || user.role==='Doctor'">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
-                    <i class="vsm-icon pe-7s-rocket"></i>
+                    <span class="vsm-icon material-icons">
+                      manage_accounts
+                      </span>
                     <span class="vsm-title">Manager Users</span>
                     <i class="vsm-arrow"></i>
                   </button>
@@ -69,11 +71,15 @@
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
                       <button class="vsm-link" routerLink="/admin/main/User" [routerLinkActiveOptions]="{exact: true}">
-                        <i class="vsm-icon pe-7s-rocket"></i>
+                        <span class="vsm-icon material-icons">
+                          people
+                          </span>
                         <span class="vsm-title">Users</span>
                       </button>
                       <button class="vsm-link" routerLink="/main/ABC" [routerLinkActiveOptions]="{exact: true}">
-                        <i class="vsm-icon pe-7s-rocket"></i>
+                        <span class="vsm-icon material-icons">
+                          admin_panel_settings
+                          </span>
                         <span class="vsm-title">Roles</span>
                       </button>
                     </div>
@@ -88,8 +94,20 @@
               <ngb-panel id="dashboards">
                 <ng-template ngbPanelHeader>
                   <button class="vsm-link" routerLink="/admin/main/Dashboard" [routerLinkActiveOptions]="{exact: true}">
-                    <i class="vsm-icon pe-7s-rocket"></i>
+                    <span class="vsm-icon material-icons">
+                      dashboard
+                      </span>
                     <span class="vsm-title">Dashboard</span>
+                  </button>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="dashboards">
+                <ng-template ngbPanelHeader>
+                  <button class="vsm-link" routerLink="/admin/patientappoitment/appoitment/Setting" [routerLinkActiveOptions]="{exact: true}">
+                    <span class="vsm-icon material-icons">
+                      settings
+                      </span>
+                    <span class="vsm-title">Settings</span>
                   </button>
                 </ng-template>
               </ngb-panel>
@@ -103,7 +121,9 @@
               <ngb-panel id="Trainings">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
-                    <i class="vsm-icon pe-7s-rocket"></i>
+                    <span class="vsm-icon material-icons">
+                      health_and_safety
+                      </span>
                     <span class="vsm-title">Appoitments</span>
                     <i class="vsm-arrow"></i>
                   </button>
@@ -112,12 +132,16 @@
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
                       <button class="vsm-link" routerLink="/admin/patientappoitment/appoitment/patientappoitment" [routerLinkActiveOptions]="{exact: true}">
-                        <i class="vsm-icon pe-7s-rocket"></i>
+                        <span class="vsm-icon material-icons">
+                          accessibility
+                          </span>
                         <span class="vsm-title">Patient</span>
                       </button>
                       <button class="vsm-link" routerLink="/Patient/ABC"
                         [routerLinkActiveOptions]="{exact: true}">
-                        <i class="vsm-icon pe-7s-rocket"></i>
+                        <span class="vsm-icon material-icons">
+                          event
+                          </span>
                         <span class="vsm-title">Appoitments</span>
                       </button>
                     </div>

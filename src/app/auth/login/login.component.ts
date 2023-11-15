@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       ])],
       password: ['', Validators.compose([
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(4),
         Validators.maxLength(20),
       ])],
       rememberMe:[false, Validators.compose([

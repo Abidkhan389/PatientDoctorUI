@@ -9,14 +9,14 @@
         </div>
         <div class="widget-content-left">
           <div class="btn-group" ngbDropdown>
-            <button type="button" class="btn btn-link p-0 me-2" ngbDropdownToggle >
+            <button type="button" class="btn btn-link p-0 me-2" ngbDropdownToggle>
               <span>
                 <div class="icon-wrapper icon-wrapper-alt rounded-circle">
                   <img width="42" src="./assets/images/avatars/avatar1.png" alt="" class="rounded-circle">
                 </div>
               </span>
             </button>
-            <div class="dropdown-menu-lg " ngbDropdownMenu style="left: -110px !important;"> 
+            <div class="dropdown-menu-lg " ngbDropdownMenu style="left: -110px !important;">
               <div class="dropdown-menu-header">
                 <div class="dropdown-menu-header-inner bg-info">
                   <div class="menu-header-image opacity-2 dd-header-bg-6"></div>
@@ -38,18 +38,18 @@
                   </div>
                 </div>
               </div>
-             <div class="scroll-area-xs">
+              <div class="scroll-area-xs">
                 <perfect-scrollbar [autoPropagation]="true">
                   <ul class="nav flex-column">
                     <li class="nav-item-header nav-item">Activity</li>
                     <li class="nav-item"><a [routerLink]="[]" class="nav-link">Chat
                         <div class="ms-auto badge rounded-pill bg-info">8</div>
                       </a></li>
-                    <li class="nav-item"><a [routerLink]="[]" class="nav-link">Recover Password</a></li>
+                    <li class="nav-item">
+                      <a [routerLink]="['/settings']" class="nav-link">Settings</a>
+                    </li>
                     <li class="nav-item-header nav-item">My Account</li>
-                    <li class="nav-item"><a [routerLink]="[]" class="nav-link">Settings
-                        <div class="ms-auto badge bg-success">New</div>
-                      </a></li>
+
                     <li class="nav-item"><a [routerLink]="[]" class="nav-link">Messages
                         <div class="ms-auto badge bg-warning">512</div>
                       </a></li>
@@ -63,13 +63,15 @@
               <div class="grid-menu grid-menu-2col overflow-hidden">
                 <div class="g-0 row">
                   <div class="col-sm-6">
-                    <button class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-warning">
+                    <button
+                      class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-warning">
                       <i class="pe-7s-chat icon-gradient bg-amy-crisp btn-icon-wrapper mb-2"></i>
                       Message Inbox
                     </button>
                   </div>
                   <div class="col-sm-6">
-                    <button class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-danger">
+                    <button
+                      class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-danger">
                       <i class="pe-7s-ticket icon-gradient bg-love-kiss btn-icon-wrapper mb-2"></i>
                       <b>Suppor Tickets</b>
                     </button>

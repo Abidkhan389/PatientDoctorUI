@@ -12,54 +12,36 @@ export class LookupService extends ApiService {
 
   constructor(public httpClient: HttpClient) {
     super(httpClient);
-}
-getAllDoctors() {
-  let onSuccess = (value) => {
-    let data = value;
-    if (data) {
-      return data.data;
-    } else {
-      showErrorMessage(data.message)
-      return false;
-    }
-  };
-  return this.service(this.get(APIPaths.getAllDoctors)).pipe(
-    map(value => this.processPayload(value)),
-    map(onSuccess)
-  );
-}
-//Get All Categories with name and id for dropdown
-// getAllCategoriesForCourses()
-// {
-//   let onSuccess = (value) => {
-//     let data = value;
-//     if (data.success) {
-//       return data.data;
-//     } else {
-//       showErrorMessage(data.message)
-//       return false;
-//     }
-//   };
-//   return this.service(this.get(APIPaths.getAllCategoriesForCourses)).pipe(
-//     map(value => this.processPayload(value)),
-//     map(onSuccess)
-//   );
-// }
-
-// GetAllLecturesByCourseId(val) {
-//   let params = new HttpParams().set('Id', val);
-//   let onSuccess = (value) => {
-//     let data = value;
-//     if (data.success) {
-//       return data.data;
-//     } else {
-//       showInfoMessage("No Lecture Exist Against The Selected Course")
-//       return false;
-//     }
-//   };
-//   return this.service(this.get(APIPaths.getLecturesForSelectedCourse,params)).pipe(
-//     map(value => this.processPayload(value)),
-//     map(onSuccess)
-//   );
-// }
+  }
+  getAllDoctors() {
+    let onSuccess = (value) => {
+      let data = value;
+      if (data) {
+        return data.data;
+      } else {
+        showErrorMessage(data.message)
+        return false;
+      }
+    };
+    return this.service(this.get(APIPaths.getAllDoctors)).pipe(
+      map(value => this.processPayload(value)),
+      map(onSuccess)
+    );
+  }
+  GetUserById(Id: any) {
+    let params = new HttpParams().set('UserId', Id);
+    let onSuccess = (value) => {
+      let data = value;
+      if (data.success) {
+        return data.data;
+      } else {
+        showErrorMessage(data.message)
+        return false;
+      }
+    };
+    return this.service(this.get(APIPaths.getUserById, params)).pipe(
+      map(value => this.processPayload(value)),
+      map(onSuccess)
+    );
+  }
 }

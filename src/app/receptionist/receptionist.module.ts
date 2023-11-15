@@ -6,13 +6,15 @@ import { AddeditpatientComponent } from './patient/addeditpatient/addeditpatient
 import { ShareModule } from '../-share/-share.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SettingsComponent } from './settings/settings.component';
 
 
 
 @NgModule({
   declarations: [
       PatientComponent,
-      AddeditpatientComponent
+      AddeditpatientComponent,
+      SettingsComponent
   ],
   imports: [
       CommonModule,

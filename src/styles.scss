@@ -655,6 +655,24 @@ background-color:#5a50ad!important;
   background-color: #fff;
   background-clip: border-box;
 }
+.chart-body {
+  padding: 1.5rem; // Adjust the padding within .card-body
+}
+
+.chart {
+  position: relative;
+  height: 100%; // Ensure the chart takes the full height of .card-body
+}
+
+.card-body {
+  padding: 1.5rem; // Adjust the padding within .card-body
+}
+
+.chart {
+  position: relative;
+  height: 100%; // Ensure the chart takes the full height of .card-body
+}
+
 .card > hr
 {
   margin-right: 0;
@@ -1033,6 +1051,26 @@ canvas {
 overflow-clip-margin: content-box;
 overflow: clip;
 }
+
+.example-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+
+
 
 
 

@@ -15,18 +15,6 @@ export class DropDownUtils {
         protected router: Router) {
 
     }
-
-    // protected getAllCoursesForDDL(callback: (data) => void) {
-    //     this.lookupService.getAllCoursesForDDL()
-    //         .subscribe(
-    //             result => {
-    //                 if (result)
-    //                     callback(result);
-    //             },
-    //             error => {
-    //                 showErrorMessage(ResultMessages.serverError)
-    //             });
-    // }
     protected GetAllDoctor(callback: (data) => void) {
         this.lookupService.getAllDoctors()
             .subscribe(
@@ -38,21 +26,16 @@ export class DropDownUtils {
                     showErrorMessage(ResultMessages.serverError)
                 });
     }
-
-    // protected getAllLecturesDDLByCourseId(val,callback: (data) => void) {
-    //     this.lookupService.GetAllLecturesByCourseId(val)
-    //         .subscribe(
-    //             result => {
-    //                 if (result)
-    //                 {   
-    //                     callback(result);
-    //                 }
-    //                 // else{
-    //                 //     callback(0);
-    //                 // }
-    //             },
-    //             error => {
-    //                 showErrorMessage(ResultMessages.serverError)
-    //             });
-    // }
+    protected GetUserById(val, callback: (data) => void) {
+        return this.lookupService.GetUserById(val)
+            .subscribe(
+                result => {
+                    if (result) {
+                        callback(result);
+                    }
+                },
+                error => {
+                    showErrorMessage(ResultMessages.serverError)
+                });
+    }
 }

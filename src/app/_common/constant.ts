@@ -14,6 +14,7 @@ var accountUrl = baseUrl + 'account/'
 var patientUrl = baseUrl + 'patient/'
 var attachmentUrl = baseUrl + 'Attachment/';
 var DashboardUrl=baseUrl+'dashboard';
+var administrationUrl = baseUrl + 'administrator/';
 
 export const APIPaths = {
 
@@ -31,7 +32,6 @@ export const APIPaths = {
     getUserById: accountUrl + 'getUserById',
     getAllRoles: accountUrl + 'getAllRoles',
     getAllDoctors:accountUrl + 'getAllDoctors',
-
     //-----------Patient URLS---------------
     getAllPatient: patientUrl + 'getAllByProc',
     updatePatient: patientUrl + 'activeInActive',
@@ -39,6 +39,9 @@ export const APIPaths = {
     getPatientById: patientUrl + 'getPatientById',
     //-----------Dashboard URLS---------------
     getDashboarddata:DashboardUrl+'/GetOverViewForAdminDashboard',
+    //----------Administration URLS -----------
+    ResetPassword: administrationUrl + 'resetPassword',
+
 }
 export const ResultMessages = {
     serverError: "Internal Server Error",
