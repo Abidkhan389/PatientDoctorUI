@@ -14,7 +14,13 @@ export class DashboardComponent {
   public barChartLabels: string[] =[];
   public barChartType: string = 'bar';
   public barChartLegend: boolean = true;
-  public barChartDataForDoctors: number[] = [0,10,20,100,200];
+  // public barChartDataForDoctors: number[] = [0,10,20,100,200];
+  public barChartDataForDoctors: any[] = [
+    {
+      label: 'Doctor OverView',
+      value: [0, 10, 20, 100, 200]
+    }
+  ];
   // For Doctors
   public barChartLabelsforDoctors: any; // Initialize as undefined
   public barChartOptionsForDoctors: any; // Initialize as undefined
