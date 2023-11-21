@@ -98,7 +98,7 @@ export class PatientDiscriptionComponent implements OnInit {
   }
   validateform() {
     this.PatientDescriptionForm = this.fb.group({
-      description: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.nameRegex), Validators.maxLength(1000), Validators.minLength(5)])],
+      description: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.titleRegex), Validators.maxLength(1000), Validators.minLength(5)])],
       medicine: this.fb.array([]),
       eye1: [null, Validators.compose([Validators.required])],
       eye2: [null, Validators.compose([Validators.required])],
