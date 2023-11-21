@@ -1,0 +1,207 @@
+<div class="modal-header mb-0 p-3">
+    <h4 class="modal-title text-bold-500 font-medium-1">{{data.IsReadOnly? "View Patient Description" : "Add Patient
+        Description"}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeClick()">
+    </button>
+</div>
+<form [formGroup]="PatientDescriptionForm" (ngSubmit)="AddDescription()" class="form-container ">
+    <div class="modal-body " style="max-height: 70vh;  overflow-y: auto; ">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4  col-4 text-center">
+                <ng-select class="font-small-1" [items]="eyes" bindLabel="name" bindValue="id" placeholder="Select Eye"
+                    formControlName="eye1">
+                </ng-select>
+                <div
+                    *ngIf="PatientDescriptionForm.controls['eye1'].touched && !PatientDescriptionForm.controls['eye1'].valid">
+                    <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                        <span class="form-control-feedback"
+                            *ngIf="PatientDescriptionForm.controls['eye1'].hasError(validation.type) ">
+                            {{validation.message}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4  col-4 text-center">
+                <ng-select class="font-small-1" [items]="eyeDistance" bindLabel="name" bindValue="id"
+                    placeholder="Select Eyesight" formControlName="distanceEye1">
+                </ng-select>
+                <div
+                    *ngIf="PatientDescriptionForm.controls['distanceEye1'].touched && !PatientDescriptionForm.controls['distanceEye1'].valid">
+                    <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                        <span class="form-control-feedback"
+                            *ngIf="PatientDescriptionForm.controls['distanceEye1'].hasError(validation.type) ">
+                            {{validation.message}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4  col-4 text-center">
+                <mat-form-field appearance="outline" style="display: block;">
+                    <mat-label>Eye Side</mat-label>
+                    <input matInput formControlName="eye1SidePoint" placeholder="Eyesight">
+                    <mat-error
+                        *ngIf="PatientDescriptionForm.controls['eye1SidePoint'].touched && !PatientDescriptionForm.controls['eye1SidePoint'].valid">
+                        <mat-error *ngFor="let validation of validationMessages.value">
+                            <mat-error
+                                *ngIf="PatientDescriptionForm.controls['eye1SidePoint'].hasError(validation.type) ">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4  col-4 text-center">
+                <ng-select class="font-small-1" [items]="eyes" bindLabel="name" bindValue="id" placeholder="Select Eye"
+                    formControlName="eye2">
+                </ng-select>
+                <div
+                    *ngIf="PatientDescriptionForm.controls['eye2'].touched && !PatientDescriptionForm.controls['eye2'].valid">
+                    <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                        <span class="form-control-feedback"
+                            *ngIf="PatientDescriptionForm.controls['eye2'].hasError(validation.type) ">
+                            {{validation.message}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4  col-4 text-center">
+                <ng-select class="font-small-1" [items]="eyeDistance" bindLabel="name" bindValue="id"
+                    placeholder="Select Eyesight" formControlName="distanceEye2">
+                </ng-select>
+                <div
+                    *ngIf="PatientDescriptionForm.controls['distanceEye2'].touched && !PatientDescriptionForm.controls['distanceEye2'].valid">
+                    <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                        <span class="form-control-feedback"
+                            *ngIf="PatientDescriptionForm.controls['distanceEye2'].hasError(validation.type) ">
+                            {{validation.message}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4  col-4 text-center">
+                <mat-form-field appearance="outline" style="display: block;">
+                    <mat-label>Eyesight</mat-label>
+                    <input matInput formControlName="eye2SidePoint" placeholder="Eyesight">
+                    <mat-error
+                        *ngIf="PatientDescriptionForm.controls['eye2SidePoint'].touched && !PatientDescriptionForm.controls['eye2SidePoint'].valid">
+                        <mat-error *ngFor="let validation of validationMessages.value">
+                            <mat-error
+                                *ngIf="PatientDescriptionForm.controls['eye2SidePoint'].hasError(validation.type) ">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="form-section">
+            <div class="row" style="padding-top: 10px;">
+                <div class="col-12 text-bold-400">
+                    <h5>Description</h5>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+                <mat-form-field appearance="outline" style="display: block;">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="description" placeholder="Description"></textarea>
+                    <mat-error
+                        *ngIf="PatientDescriptionForm.controls['description'].touched && !PatientDescriptionForm.controls['description'].valid">
+                        <mat-error *ngFor="let validation of validationMessages.value">
+                            <mat-error
+                                *ngIf="PatientDescriptionForm.controls['description'].hasError(validation.type) ">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-section">
+
+                    <div class="row">
+                        <div class="col-6 text-bold-400">Medicine Option</div>
+                        <div class="col-6 float-right">
+                            <button [disabled]="data.IsReadOnly" class="btn btn-primary float-end mb-1" title="Add New"
+                                type="button" (click)="addMedicine(null,false)"><span><i
+                                        class="fa fa-plus"></i></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Medicine Table -->
+        <ng-container>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-section">
+                        <table class="table table-borderless mb-1" formArrayName="medicine">
+                            <thead>
+                                <tr class="table-secondary font-size-12">
+                                    <th class="text-center" width="50%">Medicine</th>
+                                    <th class="text-center" width="25%">صبح</th>
+                                    <th class="text-center" width="25%">دوپہر</th>
+                                    <th class="text-center" width="25%">شام</th>
+                                    <th class="text-center" width="10%">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let key of MedicineOption.controls; let i=index" [formGroupName]="i">
+                                    <!-- Existing table content -->
+                                    <td>
+                                        <!-- Add the following style for error state -->
+                                        <input formControlName="medicineTitle"
+                                            style="border-radius: 5px; border: 1px solid #ccc; ">
+                                        <div *ngIf="MedicineOption.controls[i].controls.medicineTitle.touched &&
+                                        !MedicineOption.controls[i].controls.medicineTitle.valid">
+                                            <div *ngFor="let validation of validationMessages.videoLinks"
+                                                class="has-danger">
+                                                <span class="form-control-feedback"
+                                                    *ngIf="MedicineOption.controls[i].controls.medicineTitle.hasError(validation.type)">
+                                                    {{ validation.message }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center pb-4" style="vertical-align: bottom;">
+                                        <input type="checkbox" formControlName="morning">
+                                    </td>
+                                    <td class="text-center pb-4" style="vertical-align: bottom;">
+                                        <input type="checkbox" formControlName="noon">
+                                    </td>
+                                    <td class="text-center pb-4" style="vertical-align: bottom;">
+                                        <input type="checkbox" formControlName="evening">
+                                    </td>
+                                    <td class="text-center mt-4" >
+                                        <button type="button" class="btn custom-btn" [disabled]="data.IsReadOnly" (click)="removeMedicine(i)">
+                                            <span class="material-icons" (click)="removeMedicine(i)">
+                                                <span class="material-icons">
+                                                    delete
+                                                </span>
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+    <div class="modal-footer mb-0 p-2 ">
+        <button class="btn btn-raised btn-secondary me-1 " type="button" [disabled]="loading" (click)="closeClick()">
+            <i class="fa fa-close"></i> Cancel
+        </button>
+        <button class="btn btn-raised btn-primary" type="submit" [disabled]="!PatientDescriptionForm.valid || loading"
+            [ngClass]="{'m-loader m-loader--right m-loader--info': loading}">
+            <i class="fa fa-check-square-o"></i>{{data.IsReadOnly? "View":"Add"}}
+        </button>
+    </div>
+</form>

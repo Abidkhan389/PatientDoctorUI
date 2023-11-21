@@ -7,6 +7,8 @@ import { ShareModule } from '../-share/-share.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SettingsComponent } from './settings/settings.component';
+import { PatientDiscriptionComponent } from './patient/patient-discription/patient-discription.component';
+import { AppoitmentsComponent } from './appoitments/appoitments.component';
 
 
 
@@ -14,7 +16,9 @@ import { SettingsComponent } from './settings/settings.component';
   declarations: [
       PatientComponent,
       AddeditpatientComponent,
-      SettingsComponent
+      SettingsComponent,
+      PatientDiscriptionComponent,
+      AppoitmentsComponent
   ],
   imports: [
       CommonModule,

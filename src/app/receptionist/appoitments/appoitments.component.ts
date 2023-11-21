@@ -8,29 +8,25 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { finalize } from 'rxjs/operators';
 import { DropDownUtils, Messages, NoWhitespaceValidator, ResultMessages, showErrorMessage, showSuccessMessage } from 'src/app/_common';
-import { ReceptionistService } from 'src/app/_services/administration/receptionist.service';
 import { Table } from 'src/app/interfaces/ITable';
-import { AddeditpatientComponent } from './addeditpatient/addeditpatient.component';
+import { PatientDiscriptionComponent } from '../patient/patient-discription/patient-discription.component';
+import { AddeditpatientComponent } from '../patient/addeditpatient/addeditpatient.component';
+import { AppoitmentsService } from 'src/app/_services/administration/appoitments.service';
 import { LookupService } from 'src/app/_services/lookup.service';
-import * as moment from 'moment';
-import { DatePipe } from '@angular/common';
-import { PatientDiscriptionComponent } from './patient-discription/patient-discription.component';
 
 @Component({
-  selector: 'app-patient',
-  templateUrl: './patient.component.html',
-  providers: [DatePipe],
-  styleUrls: ['./patient.component.sass']
+  selector: 'app-appoitments',
+  templateUrl: './appoitments.component.html',
+  styleUrls: ['./appoitments.component.sass']
 })
-export class PatientComponent extends DropDownUtils implements OnInit{
+export class AppoitmentsComponent  implements OnInit{
   form: FormGroup;
   loading: boolean = true;
   modalOptions: NgbModalOptions = {};
   dataSource !: MatTableDataSource<any>;
-  displayedColumns: string[] = ['sn.', 'status', 'name','doctor','doctorNumber','patientNumber','cnic','city','gender','bloodType','appointment','CheckUpStatus','actions'];
+  displayedColumns: string[] = ['sn.', 'name','doctor','doctorNumber','patientNumber','cnic','city','gender','bloodType','appointment','CheckUpStatus','actions'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  totalUsers = 0;
   pageSize = 5;
   currentPage = 1;
   noData: boolean = false;
@@ -40,25 +36,10 @@ export class PatientComponent extends DropDownUtils implements OnInit{
   isCollapsed: boolean = true;
   count: number = 0;
   validationMessages = Messages.validation_messages;
-  bloodTypes: string[] = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
-  selectedBloodType: string | null = null;
   DoctorList: any;
-  // Configuration options
-  showSpinners = true; // Show spinners for hours, minutes, and seconds
-  showSeconds = true; // Show seconds
-  stepHour = 1; // Step value for hours
-  stepMinute = 1; // Step value for minutes
-  stepSecond = 1; // Step value for seconds
-  touchUi = false; // Use touch-friendly UI
-  color = 'primary'; // Color of the datetime picker
-  enableMeridian = true; // Enable AM/PM selection
-  maxDate =moment(new Date()).format('YYYY-MM-DD')
-  inputFocused = false;
-  inputClicked: boolean = false;
-  constructor(public receptionistService: ReceptionistService,protected lookupService: LookupService, private dilog: MatDialog, private fb: FormBuilder, private modalService: NgbModal, protected router: Router) {
-    super(lookupService, router);
-    this.GetAllDoctor(data => (this.DoctorList = data));
-    
+  currentDate: Date;
+  constructor(private appoitmentsService:AppoitmentsService, private dilog: MatDialog, private fb: FormBuilder, private modalService: NgbModal, protected router: Router)
+  {
     this.tableParams = { start: 0, limit: 5, sort: '', order: 'ASC', search: null };
   }
   ngOnInit(): void {
@@ -72,9 +53,7 @@ export class PatientComponent extends DropDownUtils implements OnInit{
       cnic: ['',Validators.compose([NoWhitespaceValidator,])],
       city: ['',Validators.compose([NoWhitespaceValidator,])],
       mobileNumber: ['',Validators.compose([NoWhitespaceValidator,])],
-      doctorId: ['',Validators.compose([NoWhitespaceValidator,])],
-      //patientAppoitmentTime: ['',Validators.compose([NoWhitespaceValidator,])],
-      
+      todeydatetime:[''],
     })
   }
   // On Advance Search Submit
@@ -105,38 +84,16 @@ export class PatientComponent extends DropDownUtils implements OnInit{
   ViewPatient(Id: any) {
     this.AddEdit(Id, true);
   }
-   updateStatus(event, user) {
-    this.loading = false;
-    let model = {
-      id: user.patientId,
-      status: event ? 1 : 0
-    }
-    return this.receptionistService.updatePatientStatus(model)
-      .pipe(
-        finalize(() => {
-          this.loading = false;
-        }))
-      .subscribe(data => {
-        if (data.success) {
-          showSuccessMessage(data.message)
-          user.status = event
-        }
-        else {
-          showErrorMessage(data.message)
-          user.status = !event
-        }
-      },
-        error => {
-          showErrorMessage(ResultMessages.serverError);
-        });
+  OnPatientDescriptionView(Id: any){
+    this.AddViewPatientDescription(Id,true);
   }
-
   //Fetching All with sorting or filtering with activeInActive
   fetchAllPatient() {
     this.loading = true;
     debugger;
+    this.handleDateTimeSelection();
     Object.assign(this.tableParams, this.form.value);
-    this.receptionistService.getAllPatient(this.tableParams)
+    this.appoitmentsService.getAllTodeyPatientAppoitments(this.tableParams)
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -157,9 +114,36 @@ export class PatientComponent extends DropDownUtils implements OnInit{
         }
       });
   }
+  handleDateTimeSelection() {
+    const userSelectedDate = new Date();
+    // Convert the user-selected date to local DateTime
+    userSelectedDate.setMinutes(userSelectedDate.getMinutes() - userSelectedDate.getTimezoneOffset());
+    // Format the date as an ISO string
+    const isoDateTimeString = userSelectedDate.toISOString();
+    // Now, you can assign the formatted date to your FormGroup
+    this.form.patchValue({ todeydatetime: isoDateTimeString });
+  }
   //Add Edit With Mat Dialoge Modal Ref
   AddEdit(Id?: any, IsReadOnly?: any) {
     const dialogref = this.dilog.open(AddeditpatientComponent, {
+      disableClose: true,
+      autoFocus: false,
+      data: {
+        patientId: Id,
+        IsReadOnly: IsReadOnly
+      },
+    })
+    dialogref.afterClosed().subscribe({
+      next: (value) => {
+        if (value) {
+          this.fetchAllPatient();
+        }
+      },
+    });
+  }
+  AddViewPatientDescription(Id?: any, IsReadOnly?: any){
+    debugger;
+    const dialogref = this.dilog.open(PatientDiscriptionComponent, {
       disableClose: true,
       autoFocus: false,
       data: {

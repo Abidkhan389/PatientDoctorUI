@@ -37,6 +37,9 @@ export const APIPaths = {
     updatePatient: patientUrl + 'activeInActive',
     addEditPatient: patientUrl + 'addEditPatient',
     getPatientById: patientUrl + 'getPatientById',
+    getPatientDescriptionById: patientUrl + 'getPatientDescriptionById',
+    AddPatientDescription: patientUrl + 'addPatientDescription',
+    getAllTodeyPatientAppoitments: patientUrl + 'getAllTodeyPatientAppoitments',
     //-----------Dashboard URLS---------------
     getDashboarddata:DashboardUrl+'/GetOverViewForAdminDashboard',
     //----------Administration URLS -----------

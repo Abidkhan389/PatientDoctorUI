@@ -34,3 +34,11 @@ export enum QuestionLevel {
     Married= "Married",
     Single= "Single",
   }
+  export enum Eyes{
+    Left =0,
+    Right= 1
+  }
+  export enum EyeDistance{
+    Near=0,
+    Distance=1
+  }

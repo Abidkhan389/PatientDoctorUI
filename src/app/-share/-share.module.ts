@@ -31,6 +31,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule, } from '@angular-material-components/datetime-picker';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [
     FileUploadComponent,
@@ -77,7 +78,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatRadioModule
   ],
    providers: [
         DataService,

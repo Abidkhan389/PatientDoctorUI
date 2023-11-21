@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientComponent } from './patient/patient.component';
 import { SettingsComponent } from './settings/settings.component';
+import { AppoitmentsComponent } from './appoitments/appoitments.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path:'Setting',
     component: SettingsComponent
+  },
+  {
+    path:'Appoitments',
+    component: AppoitmentsComponent
   }
 //   {
 //     path: 'User',
