@@ -115,7 +115,7 @@ export class Helpers {
     }
 
     public static isDefaultAvatar(image: string) {
-        let img: string = '../../../../../../../assets/images/avatar.png';
+        let img: string = '../../../../../../../assets/images/avatar1.png';
         if (image != null && image != "null" && image != "" && image != undefined && image != "undefined")
             img = image
         return img;

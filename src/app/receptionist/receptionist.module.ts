@@ -9,7 +9,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { SettingsComponent } from './settings/settings.component';
 import { PatientDiscriptionComponent } from './patient/patient-discription/patient-discription.component';
 import { AppoitmentsComponent } from './appoitments/appoitments.component';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({

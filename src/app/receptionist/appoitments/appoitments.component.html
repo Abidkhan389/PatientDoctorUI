@@ -92,7 +92,7 @@
 <div class="material striped">
     <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
     <div class="mat-elevation-z8" style="overflow-x: auto;">
-        <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)" style=" max-width: 100%;
+        <mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)" style=" max-width: 100%;
         width: 100%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
             <div class="row">
                 <!-- Hashing -->
@@ -106,7 +106,7 @@
                     <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
                     <mat-cell *matCellDef="let patient">
                         <button mat-icon-button class="action-button" color="primary"
-                            (click)="ViewPatient(patient.patientId)">
+                            (click)="OnPatientDescriptionView(patient.patientId)">
                             <i class="fa fa-eye me-1"></i>
                         </button>
                     </mat-cell>
@@ -183,12 +183,11 @@
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </div>
-        </table>
+        </mat-table>
         <div *ngIf="noData">
             <p style="text-align: center;margin-top: 15px;">No Data Found.</p>
         </div>
-        <mat-paginator [length]="count" (page)="pageChanged($event)" showFirstLastButtons
-            [pageSizeOptions]="[5,10, 100, 200]">
+        <mat-paginator [length]="count" (page)="pageChanged($event)" showFirstLastButtons [pageSizeOptions]="[5,10, 100, 200]">
         </mat-paginator>
     </div>
 </div>

@@ -81,9 +81,6 @@ export class AppoitmentsComponent  implements OnInit{
     this.form.reset();
     this.fetchAllPatient()
   }
-  ViewPatient(Id: any) {
-    this.AddEdit(Id, true);
-  }
   OnPatientDescriptionView(Id: any){
     this.AddViewPatientDescription(Id,true);
   }
@@ -122,24 +119,6 @@ export class AppoitmentsComponent  implements OnInit{
     const isoDateTimeString = userSelectedDate.toISOString();
     // Now, you can assign the formatted date to your FormGroup
     this.form.patchValue({ todeydatetime: isoDateTimeString });
-  }
-  //Add Edit With Mat Dialoge Modal Ref
-  AddEdit(Id?: any, IsReadOnly?: any) {
-    const dialogref = this.dilog.open(AddeditpatientComponent, {
-      disableClose: true,
-      autoFocus: false,
-      data: {
-        patientId: Id,
-        IsReadOnly: IsReadOnly
-      },
-    })
-    dialogref.afterClosed().subscribe({
-      next: (value) => {
-        if (value) {
-          this.fetchAllPatient();
-        }
-      },
-    });
   }
   AddViewPatientDescription(Id?: any, IsReadOnly?: any){
     debugger;

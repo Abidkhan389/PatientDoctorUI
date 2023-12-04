@@ -127,8 +127,8 @@
 <div class="material striped">
     <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
     <div class="mat-elevation-z8" style="overflow-x: auto;">
-        <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)" style=" max-width: 100%;
-        width: 100%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)" style=" max-width: 100%;
+            width: 100%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
             <div class="row">
                 <!-- Hashing -->
                 <ng-container matColumnDef="sn.">
@@ -229,9 +229,9 @@
                 </ng-container>
 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                <mat-row *matRowDef="let patient; columns: displayedColumns;"></mat-row>
             </div>
-        </table>
+        </mat-table>
         <div *ngIf="noData">
             <p style="text-align: center;margin-top: 15px;">No Data Found.</p>
         </div>
