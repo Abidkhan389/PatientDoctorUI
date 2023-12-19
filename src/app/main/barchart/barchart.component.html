@@ -1,0 +1,6 @@
+<!-- <apx-chart [chart]="chartOptions.chart" [series]="chartOptions.series" [title]="chartOptions.title" [xaxis]="chartOptions.xaxis"></apx-chart> -->
+
+<!-- <apx-chart [chart]="chartOptions.chart" [series]="chartOptions.series" [title]="chartOptions.title"></apx-chart> -->
+
+<!-- <app-barchart  [doctorNames]="doctorNames" [patientCounts]="patientCounts"></app-barchart> -->
+<apx-chart *ngIf="chartOptions" [chart]="chartOptions.chart" [series]="chartOptions.series" [title]="chartOptions.title" [xaxis]="chartOptions.xaxis"></apx-chart>

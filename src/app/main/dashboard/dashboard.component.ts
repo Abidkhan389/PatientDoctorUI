@@ -10,21 +10,25 @@ import { DashboardService } from 'src/app/_services/administration/dashboard.ser
 export class DashboardComponent {
   loading:boolean=true;
   dashboarddata:any;
-  public barChartOptionsForAdmins: any; // Initialize as undefined
-  public barChartLabels: string[] =[];
-  public barChartType: string = 'bar';
-  public barChartLegend: boolean = true;
-  // public barChartDataForDoctors: number[] = [0,10,20,100,200];
-  public barChartDataForDoctors: any[] = [
-    {
-      label: 'Doctor OverView',
-      value: [0, 10, 20, 100, 200]
-    }
-  ];
-  // For Doctors
-  public barChartLabelsforDoctors: any; // Initialize as undefined
-  public barChartOptionsForDoctors: any; // Initialize as undefined
+  // public barChartOptionsForAdmins: any; // Initialize as undefined
+  // public barChartLabels: string[] =[];
+  // public barChartType: string = 'bar';
+  // public barChartLegend: boolean = true;
+  // // public barChartDataForDoctors: number[] = [0,10,20,100,200];
+  // public barChartDataForDoctors: any[] = [
+  //   {
+  //     label: 'Doctor OverView',
+  //     value: [0, 10, 20, 100, 200]
+  //   }
+  // ];
+  // // For Doctors
+  // public barChartLabelsforDoctors: any; // Initialize as undefined
+  // public barChartOptionsForDoctors: any; // Initialize as undefined
   
+
+
+  doctorNames: string[] = [];
+  patientCounts: number[] = [];
   constructor(private dashboardService:DashboardService){
   }
   ngOnInit(): void {
@@ -39,59 +43,65 @@ export class DashboardComponent {
      }))
    .subscribe(result => {
      if (result) {
-       this.dashboarddata=result;
-       //this.barChartcourseData=this.allCourses.map(course=> course.enrollmentCount);
-       this.barChartLabelsforDoctors=this.dashboarddata.patientPerDoctorCount.map(user=> user.doctorName);
+      this.dashboarddata = result;
+      // Set doctor names and patient counts
+      this.doctorNames = this.dashboarddata.patientPerDoctorCount.map(doctor => doctor.doctorName);
+      this.patientCounts = this.dashboarddata.patientPerDoctorCount.map(doctor => doctor.patientCount);
 
-       this.barChartDataForDoctors=this.dashboarddata.patientPerDoctorCount.map(doctor=> doctor.patientCount);
-       this.initializeBarChartOptions(); // Call the method to set barChartOptions
+
+
+       //this.barChartcourseData=this.allCourses.map(course=> course.enrollmentCount);
+       //this.barChartLabelsforDoctors=this.dashboarddata.patientPerDoctorCount.map(user=> user.doctorName);
+
+       //this.barChartDataForDoctors=this.dashboarddata.patientPerDoctorCount.map(doctor=> doctor.patientCount);
+       //this.initializeBarChartOptions(); // Call the method to set barChartOptions
      }
    });
 }
-initializeBarChartOptions() {
- debugger
- // Create barChartOptions based on dashboarddata
- this.barChartOptionsForAdmins = {
-   scales: {
-     xAxes: [
-       {
-         ticks: {
-           maxRotation: 90,
-           minRotation: 0,
-         },
-       },
-     ],
-   },
- };
- this.barChartOptionsForDoctors = {
-   scales: {
-     xAxes: [
-       {
-         ticks: {
-           maxRotation: 90,
-           minRotation: 0,
-         },
-       },
-     ],
-   },
-   // tooltips: {
-   //   callbacks: {
-   //     label: (tooltipItem, data) => {
-   //       debugger
-   //       const userId = this.dashboarddata.userPerCourseCount[tooltipItem.index].userId;
-   //       const userName = this.dashboarddata.userPerCourseCount[tooltipItem.index].userName;
-   //       const userCountData = this.dashboarddata.userPerCourseCount.find(data => data.userId === userId);
-   //       const enrollmentCount = userCountData ? userCountData.enrollmentCount : 0;
-   //       // Calculate the chart height for the current course individually
-   //       //this.chartHeight = (enrollmentCount / this.dashboarddata.enrolledUserCount) * 400; // Adjust the maximum height as needed
-   //       // Assign the height to the chart container
-   //       //document.querySelector('.chart-container').style.height = courseChartHeight + 'px';
+// initializeBarChartOptions() {
+//  debugger
+//  // Create barChartOptions based on dashboarddata
+//  this.barChartOptionsForAdmins = {
+//    scales: {
+//      xAxes: [
+//        {
+//          ticks: {
+//            maxRotation: 90,
+//            minRotation: 0,
+//          },
+//        },
+//      ],
+//    },
+//  };
+//  this.barChartOptionsForDoctors = {
+//    scales: {
+//      xAxes: [
+//        {
+//          ticks: {
+//            maxRotation: 90,
+//            minRotation: 0,
+//          },
+//        },
+//      ],
+//    },
+//    // tooltips: {
+//    //   callbacks: {
+//    //     label: (tooltipItem, data) => {
+//    //       debugger
+//    //       const userId = this.dashboarddata.userPerCourseCount[tooltipItem.index].userId;
+//    //       const userName = this.dashboarddata.userPerCourseCount[tooltipItem.index].userName;
+//    //       const userCountData = this.dashboarddata.userPerCourseCount.find(data => data.userId === userId);
+//    //       const enrollmentCount = userCountData ? userCountData.enrollmentCount : 0;
+//    //       // Calculate the chart height for the current course individually
+//    //       //this.chartHeight = (enrollmentCount / this.dashboarddata.enrolledUserCount) * 400; // Adjust the maximum height as needed
+//    //       // Assign the height to the chart container
+//    //       //document.querySelector('.chart-container').style.height = courseChartHeight + 'px';
 
-   //       //return `${userName}: Courses ${enrollmentCount}`;
-   //       return `Courses ${enrollmentCount}`;
-   //     },
-   //   },
-   // },
- };
-}
+//    //       //return `${userName}: Courses ${enrollmentCount}`;
+//    //       return `Courses ${enrollmentCount}`;
+//    //     },
+//    //   },
+//    // },
+//  };
+// }
 }

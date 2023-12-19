@@ -8,6 +8,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { UsersComponent } from './users/users.component';
 import { AddEditUserComponent } from './users/add-edit-user/add-edit-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BarchartComponent } from './barchart/barchart.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         UsersComponent,
         AddEditUserComponent,
         DashboardComponent,
+        BarchartComponent,
     ],
     imports: [
         CommonModule,
