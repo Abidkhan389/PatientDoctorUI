@@ -9,6 +9,8 @@ import { UsersComponent } from './users/users.component';
 import { AddEditUserComponent } from './users/add-edit-user/add-edit-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BarchartComponent } from './barchart/barchart.component';
+import { MedicineTypeComponent } from './medicine-type/medicine-type.component';
+import { AddEditMedicineTyComponent } from './medicine-type/add-edit-medicine-ty/add-edit-medicine-ty.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { BarchartComponent } from './barchart/barchart.component';
         AddEditUserComponent,
         DashboardComponent,
         BarchartComponent,
+        MedicineTypeComponent,
+        AddEditMedicineTyComponent,
     ],
     imports: [
         CommonModule,

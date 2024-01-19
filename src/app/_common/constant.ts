@@ -12,6 +12,7 @@ export const MessageTypes = {
 var baseUrl = environment.baseUrl;
 var accountUrl = baseUrl + 'account/'
 var patientUrl = baseUrl + 'patient/'
+var medicineTypeUrl = baseUrl + 'medicinetype/'
 var attachmentUrl = baseUrl + 'Attachment/';
 var DashboardUrl=baseUrl+'dashboard';
 var administrationUrl = baseUrl + 'administrator/';
@@ -44,7 +45,11 @@ export const APIPaths = {
     getDashboarddata:DashboardUrl+'/GetOverViewForAdminDashboard',
     //----------Administration URLS -----------
     ResetPassword: administrationUrl + 'resetPassword',
-
+    //---------- MedicineType URLS -----------
+    getAllMedicineType:medicineTypeUrl + 'getAllByProc',
+    addEditMedicineType: medicineTypeUrl + 'addEditmedicineType',
+    updateMedicinetype: medicineTypeUrl + 'activeInActive',
+    getMedicineTypeById :medicineTypeUrl + 'getMedicineTypeById'
 }
 export const ResultMessages = {
     serverError: "Internal Server Error",

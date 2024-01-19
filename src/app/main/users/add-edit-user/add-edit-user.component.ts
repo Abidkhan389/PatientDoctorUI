@@ -80,7 +80,6 @@ export class AddEditUserComponent {
     this.userManagementService.addEditUser(model).subscribe((data: any) => {
       this.dialogref.close(true);
     });
-
   }
   validateform() {
     this.UserForm = this.fb.group({
