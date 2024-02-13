@@ -7,79 +7,85 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { finalize } from 'rxjs/operators';
-import { Messages, NoWhitespaceValidator, ResultMessages, showErrorMessage, showSuccessMessage } from 'src/app/_common';
-import { MedicineTypeService } from 'src/app/_services/administration/medicine-type.service';
+import { DropDownUtils, Messages, NoWhitespaceValidator, ResultMessages, showErrorMessage, showSuccessMessage } from 'src/app/_common';
+import { MedicineService } from 'src/app/_services/administration/medicine.service';
 import { Table } from 'src/app/interfaces/ITable';
-import { AddEditMedicineTyComponent } from './add-edit-medicine-ty/add-edit-medicine-ty.component';
+import { AddEditMedicineComponent } from './add-edit-medicine/add-edit-medicine.component';
+import { LookupService } from 'src/app/_services/lookup.service';
 
 @Component({
-  selector: 'app-medicine-type',
-  templateUrl: './medicine-type.component.html',
-  styleUrls: ['./medicine-type.component.sass']
+  selector: 'app-medicine',
+  templateUrl: './medicine.component.html',
+  styleUrls: ['./medicine.component.sass']
 })
-export class MedicineTypeComponent implements OnInit {
+export class MedicineComponent extends DropDownUtils implements OnInit {
   form: FormGroup;
   loading:boolean= true;
-  medineTypeList:any;
-  medicineType: any[] = [];
+  medineList:any;
+  medicine: any[] = [];
+  DoctorList: any;
+  MedicineTypeList: any;
   modalOptions: NgbModalOptions = {};
   dataSource !: MatTableDataSource<any>;
-  displayedColumns: string[] = ['sn.', 'status','type','MG','actions'];
+  displayedColumns: string[] = ['sn.', 'status','MedicineName','MedicineType','DoctoerName','StartingDate','ExpiryDate','actions'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   pageSize = 5;
   currentPage = 1;
   noData: boolean = false;
-  CurrentMedicineTypeId: any;
+  CurrentMedicineId: any;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   tableParams: Table;
   @ViewChild('myTable') table: any;
   isCollapsed: boolean = true;
   count: number = 0;
   validationMessages = Messages.validation_messages;
-  constructor(private medicineTypeService:MedicineTypeService, private dilog: MatDialog, private fb: FormBuilder, private modalService: NgbModal, protected router: Router){
+  constructor(private medicineService:MedicineService,protected lookupService: LookupService, private dilog: MatDialog, private fb: FormBuilder, private modalService: NgbModal, protected router: Router){
+    super(lookupService, router);
+    this.GetAllDoctor(data => (this.DoctorList = data));
+    this.GetAllMedicineType(data => (this.MedicineTypeList=data));
     this.tableParams = { start: 0, limit: 5, sort: '', order: 'ASC', search: null };
   }
   ngOnInit(): void {
     this.validateForm();
-    this.fetchAllMedicineType();
+    this.fetchAllMedicine();
   }
   // On Advance Search Submit
   onSubmit() {
     this.noData = false;
     this.tableParams.start = 0;
-    this.fetchAllMedicineType()
+    this.fetchAllMedicine()
   }
    // Pagination with server side
    onPaginate(pageEvent: PageEvent) {
     this.tableParams.limit = pageEvent.pageSize
     this.tableParams.start = pageEvent.pageIndex * pageEvent.pageSize
-    this.fetchAllMedicineType()
+    this.fetchAllMedicine()
   }
    //Sorting on Coloum With MatSort
    onSort(sort: Sort) {
     this.tableParams.sort = sort.active;
     this.tableParams.order = sort.direction;
     this.tableParams.start = 0;
-    this.fetchAllMedicineType()
+    this.fetchAllMedicine()
   }
   //Reset Form Values on Advance Search
   resetTable() {
     this.noData = false;
     this.form.reset();
-    this.fetchAllMedicineType()
+    this.fetchAllMedicine()
   }
-  ViewMedicineType(Id: any) {
-    this.CurrentMedicineTypeId = Id;
-    this.AddEdit(this.CurrentMedicineTypeId, true);
+  ViewMedicine(Id: any) {
+    this.CurrentMedicineId = Id;
+    this.AddEdit(this.CurrentMedicineId, true);
   }
-  updateStatus(event, medicinetype) {
+  updateStatus(event, medicine) {
     this.loading = false;
     let model = {
-      id: medicinetype.id,
+      id: medicine.id,
       status: event ? 1 : 0
     }
-    return this.medicineTypeService.updateMedicineTypeStatus(model)
+    return this.medicineService.updateMedicineStatus(model)
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -87,11 +93,11 @@ export class MedicineTypeComponent implements OnInit {
       .subscribe(data => {
         if (data.success) {
           showSuccessMessage(data.message)
-          medicinetype.status = event
+          medicine.status = event
         }
         else {
           showErrorMessage(data.message)
-          medicinetype.status = !event
+          medicine.status = !event
         }
       },
         error => {
@@ -100,14 +106,16 @@ export class MedicineTypeComponent implements OnInit {
   }
   validateForm(){
     this.form= this.fb.group({
-      typeName:['', Validators.compose([NoWhitespaceValidator])],
+      medicineName:['', Validators.compose([NoWhitespaceValidator])],
+      doctorId:['', Validators.compose([NoWhitespaceValidator])],
+      dedicineTypeId:['', Validators.compose([NoWhitespaceValidator])],
     })
   }
-  fetchAllMedicineType(){
+  fetchAllMedicine(){
     this.loading = true;
     debugger;
     Object.assign(this.tableParams, this.form.value);
-    this.medicineTypeService.getAllMedicineType(this.tableParams)
+    this.medicineService.getAllMedicine(this.tableParams)
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -130,18 +138,18 @@ export class MedicineTypeComponent implements OnInit {
   }
   //Add Edit With Mat Dialoge Modal Ref
   AddEdit(Id?: any, IsReadOnly?: any) {
-    const dialogref = this.dilog.open(AddEditMedicineTyComponent, {
+    const dialogref = this.dilog.open(AddEditMedicineComponent, {
       disableClose: true,
       autoFocus: false,
       data: {
-        MedicineTypeId: Id,
+        medicineId: Id,
         IsReadOnly: IsReadOnly
       },
     })
     dialogref.afterClosed().subscribe({
       next: (value) => {
         if (value) {
-          this.fetchAllMedicineType();
+          this.fetchAllMedicine();
         }
       },
     });

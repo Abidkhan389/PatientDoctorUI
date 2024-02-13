@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -29,7 +29,9 @@ export class AddEditMedicineTyComponent {
   }
   GetMedicineType() {
     this.loading = true;
-    this.medicineTypeService.getMedicineTypeById(this.data.MedicineTypeId).pipe(
+    let model = Object.assign({});
+    model.id= this.data.MedicineTypeId;
+    this.medicineTypeService.getMedicineTypeById(model).pipe(
       finalize(() => {
         this.loading = false;
       }))
@@ -63,8 +65,38 @@ export class AddEditMedicineTyComponent {
   validateform() {
     this.MedicineTypeForm= this.fb.group({
       typeName: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.titleRegex), Validators.maxLength(50)])],
+      tabletMg: ['', Validators.compose([NoWhitespaceValidator, Validators.pattern(Patterns.greaterThanZero), this.integerOrNullValidator()])],
     })
   }
+  // Custom validator for tabletMg to ensure it's null or a valid integer
+integerOrNullValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    if (value === null || value === '') {
+      return null; // Allow null or empty string
+    }
+    const intValue = parseInt(value, 10);
+    if (isNaN(intValue) || !Number.isInteger(intValue) || intValue <= 0) {
+      return { invalidInteger: true }; // Return error if not a valid integer
+    }
+    return null; // No error, value is a valid integer
+  };
+}
+  // tabletGramValidator(control: AbstractControl): ValidationErrors | null {
+  //   const value = control.value;
+  //   // Check if the value is a number
+  //   if (isNaN(value)) {
+  //     return { 'invalidNumber': true };
+  //   }
+  //   // Convert the number to a string
+  //   const stringValue = value.toString();
+  //   // Check if the string length is between 1 and 4
+  //   if (stringValue.length < 1 || stringValue.length > 4) {
+  //     return { 'invalidLength': true };
+  //   }
+  //   // Validation passed
+  //   return null;
+  // }
   //Its Close The DialogRef Modal
   closeClick() {
     this.dialogref.close();

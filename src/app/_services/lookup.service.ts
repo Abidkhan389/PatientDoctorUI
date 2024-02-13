@@ -44,4 +44,19 @@ export class LookupService extends ApiService {
       map(onSuccess)
     );
   }
+  GetAllMedicineType() {
+    let onSuccess = (value) => {
+      let data = value;
+      if (data.success) {
+        return data.data;
+      } else {
+        showErrorMessage(data.message)
+        return false;
+      }
+    };
+    return this.service(this.get(APIPaths.getAllMeDicineType)).pipe(
+      map(value => this.processPayload(value)),
+      map(onSuccess)
+    );
+  }
 }

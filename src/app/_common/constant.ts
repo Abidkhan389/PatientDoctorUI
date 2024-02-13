@@ -13,6 +13,7 @@ var baseUrl = environment.baseUrl;
 var accountUrl = baseUrl + 'account/'
 var patientUrl = baseUrl + 'patient/'
 var medicineTypeUrl = baseUrl + 'medicinetype/'
+var medicineUrl = baseUrl + 'medicine/'
 var attachmentUrl = baseUrl + 'Attachment/';
 var DashboardUrl=baseUrl+'dashboard';
 var administrationUrl = baseUrl + 'administrator/';
@@ -49,7 +50,13 @@ export const APIPaths = {
     getAllMedicineType:medicineTypeUrl + 'getAllByProc',
     addEditMedicineType: medicineTypeUrl + 'addEditmedicineType',
     updateMedicinetype: medicineTypeUrl + 'activeInActive',
-    getMedicineTypeById :medicineTypeUrl + 'getMedicineTypeById'
+    getMedicineTypeById :medicineTypeUrl + 'getMedicineTypeById',
+    getAllMeDicineType : medicineTypeUrl + 'getAllMeDicineType',
+    //---------- Medicine URLS -----------
+    getAllMedicine:medicineUrl + 'getAllByProc',
+    addEditMedicine: medicineUrl + 'addEditmedicine',
+    updateMedicine: medicineUrl + 'activeInActive',
+    getMedicineById :medicineUrl + 'getMedicineById'
 }
 export const ResultMessages = {
     serverError: "Internal Server Error",

@@ -38,4 +38,15 @@ export class DropDownUtils {
                     showErrorMessage(ResultMessages.serverError)
                 });
     }
+    protected GetAllMedicineType(callback: (data) => void) {
+        this.lookupService.GetAllMedicineType()
+            .subscribe(
+                result => {
+                    if (result)
+                        callback(result);
+                },
+                error => {
+                    showErrorMessage(ResultMessages.serverError)
+                });
+    }
 }

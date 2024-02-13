@@ -1,19 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiService } from '../api.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Table } from 'src/app/interfaces/ITable';
 import { APIPaths, showErrorMessage, showSuccessMessage } from 'src/app/_common';
+import { Table } from 'src/app/interfaces/ITable';
+import { ApiService } from '../api.service';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MedicineTypeService extends ApiService {
-
+export class MedicineService extends ApiService{
+ 
+ 
   constructor(public httpClient: HttpClient) { 
     super(httpClient)
   }
-  getAllMedicineType(model:Table){
+  getAllMedicine(model:Table){
     let onSuccess = (value) => {
       let data = value;
       if (data.totalCount != 0) {
@@ -23,22 +24,22 @@ export class MedicineTypeService extends ApiService {
         return false;
       }
     };
-    return this.service(this.post(APIPaths.getAllMedicineType,model)).pipe(
+    return this.service(this.post(APIPaths.getAllMedicine,model)).pipe(
       map(value => this.processPayload(value)),
       map(onSuccess)
     );
   }
-  updateMedicineTypeStatus(model: any) {
+  updateMedicineStatus(model: any) {
     let onSuccess = (value) => {
       let data = value;
       return data
     };
-    return this.service(this.post(APIPaths.updateMedicinetype, model)).pipe(
+    return this.service(this.post(APIPaths.updateMedicine, model)).pipe(
       map(value => this.processPayload(value)),
       map(onSuccess)
     );
   }
-  addEditMedicineType(model: any) {
+  addEditMedicine(model: any) {
     let onSuccess = (value) => {
       let data = value;
       if (data.success) {
@@ -49,12 +50,12 @@ export class MedicineTypeService extends ApiService {
         return false;
       }
     };
-    return this.service(this.post(APIPaths.addEditMedicineType, model)).pipe(
+    return this.service(this.post(APIPaths.addEditMedicine, model)).pipe(
       map(value => this.processPayload(value)),
       map(onSuccess)
     );
   }
-  getMedicineTypeById(model: any) {
+  getMedicineById(model: any) {
     //let params = new HttpParams().set('MedicineTypeId', Id);
     let onSuccess = (value) => {
       let data = value;
@@ -65,7 +66,7 @@ export class MedicineTypeService extends ApiService {
         return false;
       }
     };
-    return this.service(this.post(APIPaths.getMedicineTypeById, model)).pipe(
+    return this.service(this.post(APIPaths.getMedicineById, model)).pipe(
       map(value => this.processPayload(value)),
       map(onSuccess)
     );

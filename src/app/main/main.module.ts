@@ -11,6 +11,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BarchartComponent } from './barchart/barchart.component';
 import { MedicineTypeComponent } from './medicine-type/medicine-type.component';
 import { AddEditMedicineTyComponent } from './medicine-type/add-edit-medicine-ty/add-edit-medicine-ty.component';
+import { MedicineComponent } from './medicine/medicine.component';
+import { AddEditMedicineComponent } from './medicine/add-edit-medicine/add-edit-medicine.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { AddEditMedicineTyComponent } from './medicine-type/add-edit-medicine-ty
         BarchartComponent,
         MedicineTypeComponent,
         AddEditMedicineTyComponent,
+        MedicineComponent,
+        AddEditMedicineComponent,
     ],
     imports: [
         CommonModule,

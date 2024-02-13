@@ -76,7 +76,7 @@
                     <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
                     <mat-cell *matCellDef="let medicinetype">
                         <button mat-icon-button class="action-button" color="primary"
-                            (click)="ViewPatient(medicinetype.id)">
+                            (click)="ViewMedicineType(medicinetype.id)">
                             <i class="fa fa-eye me-1"></i>
                         </button>
                         <button mat-icon-button color="primary" *ngIf="medicinetype.status==1"
@@ -85,10 +85,15 @@
                         </button>
                     </mat-cell>
                 </ng-container>
-                 <!-- type Column -->
-                 <ng-container matColumnDef="type">
+                <!-- type Column -->
+                <ng-container matColumnDef="type">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Type Name</mat-header-cell>
                     <mat-cell *matCellDef="let medicinetype"> {{medicinetype.typeName}} </mat-cell>
+                </ng-container>
+                <!-- MG Column -->
+                <ng-container matColumnDef="MG">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>MG</mat-header-cell>
+                    <mat-cell *matCellDef="let medicinetype"> {{medicinetype.tabletMg}} </mat-cell>
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let medicinetype; columns: displayedColumns;"></mat-row>
