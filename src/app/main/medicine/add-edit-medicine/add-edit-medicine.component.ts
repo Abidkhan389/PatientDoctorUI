@@ -36,7 +36,7 @@ export class AddEditMedicineComponent extends DropDownUtils implements OnInit {
     private dilog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) {
       super(lookupService, router);
       this.GetAllDoctor(data => (this.DoctorList = data));
-      this.GetAllMedicineType(data => (this.MedicineTypeList=data));
+      this.GetAllMedicineType(data => (this.MedicineTypeList = data));
   }
   ngOnInit(): void {
     this.validateform();
@@ -47,7 +47,7 @@ export class AddEditMedicineComponent extends DropDownUtils implements OnInit {
   GetMedicine() {
     this.loading = true;
     let model = Object.assign({});
-    model.id= this.data.MedicineTypeId;
+    model.id= this.data.medicineId;
     this.medicineService.getMedicineById(model).pipe(
       finalize(() => {
         this.loading = false;

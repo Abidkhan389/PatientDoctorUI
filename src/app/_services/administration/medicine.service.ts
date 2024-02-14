@@ -17,9 +17,12 @@ export class MedicineService extends ApiService{
   getAllMedicine(model:Table){
     let onSuccess = (value) => {
       let data = value;
-      if (data.totalCount != 0) {
+      if (data.totalCount != 0)
+      {
         return data.data;
-      } else {
+      }
+      else
+      {
         showErrorMessage(data.message)
         return false;
       }

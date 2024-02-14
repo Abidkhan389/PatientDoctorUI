@@ -39,7 +39,7 @@ export class DropDownUtils {
                 });
     }
     protected GetAllMedicineType(callback: (data) => void) {
-        this.lookupService.GetAllMedicineType()
+        this.lookupService.getAllMedicineType()
             .subscribe(
                 result => {
                     if (result)

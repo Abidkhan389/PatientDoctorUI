@@ -25,7 +25,7 @@
         <div class="row" style="margin-bottom: 36.89px;">
             <div class="col-lg-6 col-md-6 col-sm-12  col-12 text-center">
                 <!-- <label [ngStyle]="{color: isreadOnly? 'grey': 'black' }">Select Gender</label> -->
-                <ng-select class="font-small-1" [items]="MedicineTypeList" bindLabel="TypeName" bindValue="id"
+                <ng-select class="font-small-1" [items]="MedicineTypeList" bindLabel="typeName" bindValue="id"
                                 placeholder="Select Medicine Type" formControlName="medicineTypeId">
                 </ng-select>
                 <div *ngIf="MedicineForm.controls['medicineTypeId'].touched && !MedicineForm.controls['medicineTypeId'].valid">
