@@ -135,12 +135,12 @@
                 <!-- StartingDate Column -->
                 <ng-container matColumnDef="StartingDate">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Starting Date</mat-header-cell>
-                    <mat-cell *matCellDef="let medicine"> {{medicine.startingDate}} </mat-cell>
+                    <mat-cell *matCellDef="let medicine"> {{medicine.startingDate | date:'short'}} </mat-cell>
                 </ng-container>
                  <!-- ExpiryDate Column -->
                  <ng-container matColumnDef="ExpiryDate">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Expiry Date</mat-header-cell>
-                    <mat-cell *matCellDef="let medicine"> {{medicine.expiryDate}} </mat-cell>
+                    <mat-cell *matCellDef="let medicine"> {{medicine.expiryDate | date:'short'}} </mat-cell>
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let medicine; columns: displayedColumns;"></mat-row>
