@@ -88,13 +88,45 @@
                   </div>
                 </ng-template>
               </ngb-panel>
+
+               <!----------------- doctor CheckUp Fee Section --------------------->
+
+               <ngb-panel>
+                <ng-template ngbPanelHeader>
+                  <div class="vsm-header">DoctorCheckUpFee Management</div>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="doctorCheckUpFee" *ngIf="user.role==='Admin' || user.role==='Doctor'">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <span class="vsm-icon material-icons">
+                      manage_accounts
+                      </span>
+                    <span class="vsm-title">Manage DoctorCheckUpFee</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <button class="vsm-link" routerLink="/admin/main/doctorCheckUpFee" [routerLinkActiveOptions]="{exact: true}">
+                        <span class="vsm-icon material-icons">
+                          people
+                          </span>
+                        <span class="vsm-title">Doctor CheckUp Fee</span>
+                      </button>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+
               <!----------------- Medicine Section ------------------------>
               <ngb-panel>
                 <ng-template ngbPanelHeader>
                   <div class="vsm-header">Medicine</div>
               </ng-template>
               </ngb-panel>
-              <ngb-panel  *ngIf="user.role==='Admin' || user.role==='Doctor'">
+              <ngb-panel   *ngIf="user.role==='Admin' || user.role==='Doctor'">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <span class="vsm-icon material-icons">
@@ -187,7 +219,7 @@
                   </div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="dashboards">
+              <ngb-panel id="aboutUs">
                 <ng-template ngbPanelHeader>
                   <button class="vsm-link" routerLink="/main/Assessment" [routerLinkActiveOptions]="{exact: true}">
                     <i class="vsm-icon pe-7s-rocket"></i>

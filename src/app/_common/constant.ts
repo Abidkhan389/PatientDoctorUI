@@ -17,6 +17,7 @@ var medicineUrl = baseUrl + 'medicine/'
 var attachmentUrl = baseUrl + 'Attachment/';
 var DashboardUrl=baseUrl+'dashboard';
 var administrationUrl = baseUrl + 'administrator/';
+var doctorCheckUpFeeUrl = baseUrl + 'doctorCheckUpFee'
 
 export const APIPaths = {
 
@@ -46,17 +47,23 @@ export const APIPaths = {
     getDashboarddata:DashboardUrl+'/GetOverViewForAdminDashboard',
     //----------Administration URLS -----------
     ResetPassword: administrationUrl + 'resetPassword',
-    //---------- MedicineType URLS -----------
+    //---------- MedicineType URLS ------------
     getAllMedicineType:medicineTypeUrl + 'getAllByProc',
     addEditMedicineType: medicineTypeUrl + 'addEditmedicineType',
     updateMedicinetype: medicineTypeUrl + 'activeInActive',
     getMedicineTypeById :medicineTypeUrl + 'getMedicineTypeById',
     getAllMeDicineType : medicineTypeUrl + 'getAllMeDicineType',
-    //---------- Medicine URLS -----------
+    //---------- Medicine URLS -----------------
     getAllMedicine:medicineUrl + 'getAllByProc',
     addEditMedicine: medicineUrl + 'addEditmedicine',
     updateMedicine: medicineUrl + 'activeInActive',
-    getMedicineById :medicineUrl + 'getMedicineById'
+    getMedicineById :medicineUrl + 'getMedicineById',
+    //----------- Doctor CheckUp Fee -----------
+    getAllDoctorCheckUpFee : doctorCheckUpFeeUrl + 'getAllByProc',
+    updateDoctorCheckUpFee : doctorCheckUpFeeUrl + 'activeInActive',
+    addEditDoctorCheckUpFee : doctorCheckUpFeeUrl + 'addEditDoctorCheckUpFee',
+    getDoctorCheckUpFeeById : doctorCheckUpFeeUrl + 'getDoctorCheckUpFeeById'
+
 }
 export const ResultMessages = {
     serverError: "Internal Server Error",

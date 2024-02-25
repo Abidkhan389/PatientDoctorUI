@@ -1,0 +1,67 @@
+<div class="filter-widget card">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" role="form">
+        <div (click)="isCollapsed = !isCollapsed" class="filter-header p-2">
+            <span class="filter-title"><i class="fa fa-search me-2"></i>Advanced Search Filters</span>
+            <a [attr.aria-expanded]="!isCollapsed" aria-controls="collapseFilter" style="float:right">
+                <i class="fa fa-search" [ngClass]="{'fa-chevron-down': !isCollapsed, 'fa-chevron-up': isCollapsed}"></i>
+            </a>
+        </div>
+        <div id="collapseFilter" [ngbCollapse]="!isCollapsed">
+            <div class="filter-content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Doctor Name:</label>
+                            <input type="text" class="form-control " formControlName="doctorName"
+                                placeholder="Search Here">
+                            <div *ngIf="form.controls['doctorName'].touched && !form.controls['doctorName'].valid">
+                                <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                                    <span class="form-control-feedback"
+                                        *ngIf="form.controls['doctorName'].hasError(validation.type) ">
+                                        {{validation.message}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Doctor Fee :</label>
+                            <input type="text" class="form-control " formControlName="doctorFee"
+                                placeholder="Search Here">
+                            <div *ngIf="form.controls['doctorFee'].touched && !form.controls['doctorFee'].valid">
+                                <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                                    <span class="form-control-feedback"
+                                        *ngIf="form.controls['doctorFee'].hasError(validation.type) ">
+                                        {{validation.message}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-12">
+                        <div class="form-group mb-0">
+                            <button class="mb-2 me-2 btn-icon btn-shadow  btn btn-primary"
+                                [ngClass]="{'m-loader m-loader--right m-loader--info': loading}" type="submit"
+                                [disabled]="!form.valid" style="margin-top: 10px;">
+                                <i class="fa fa-search"></i> Search
+                            </button>
+                            <button class="mb-2 mr-2 btn-icon btn-shadow  btn btn-outline-danger " type="reset"
+                                (click)="resetTable()">
+                                <i class="fa fa-close"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-sm-12 " style="margin-top: 10px;">
+        <button class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow  btn btn-primary  float-end" (click)="AddEdit()"
+            title="Add New"><i class="fa fa-plus "></i></button>
+    </div>
+</div>
