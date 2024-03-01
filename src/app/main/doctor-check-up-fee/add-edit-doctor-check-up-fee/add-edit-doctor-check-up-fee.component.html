@@ -1,1 +1,48 @@
-<p>add-edit-doctor-check-up-fee works!</p>
+<div class="modal-header mb-0 p-3">
+    <h4 class="modal-title text-bold-500 font-medium-1">{{data.IsReadOnly? "View" : (data.doctorCheckFeeId? "Edit Check Up Fee" :"Add Check Up Fee")}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeClick()">
+    </button>
+</div>
+<form [formGroup]="DoctorCheckUpFeeForm" (ngSubmit)="AddEdit()" class="form-container" >
+    <div class="modal-body " style="max-height: 70vh; ">
+        <div class="row" >
+            <div class="col-lg-6 col-md-6 col-sm-12  col-12 text-center">
+                <mat-form-field appearance="outline" style="display: block;">
+                    <mat-label>doctor Fee</mat-label>
+                    <input matInput formControlName="doctorFee" placeholder="111">
+                    <mat-error
+                        *ngIf="DoctorCheckUpFeeForm.controls['doctorFee'].touched && !DoctorCheckUpFeeForm.controls['doctorFee'].valid">
+                        <mat-error *ngFor="let validation of validationMessages.value">
+                            <mat-error *ngIf="DoctorCheckUpFeeForm.controls['doctorFee'].hasError(validation.type) ">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12  col-12 text-center">
+                <!-- <label [ngStyle]="{color: isreadOnly? 'grey': 'black' }"></label> -->
+                <ng-select class="font-small-1" [items]="DoctorList" bindLabel="userName" bindValue="id"
+                    placeholder="Select Doctor" formControlName="doctorId">
+                </ng-select>
+                <div *ngIf="DoctorCheckUpFeeForm.controls['doctorId'].touched && !DoctorCheckUpFeeForm.controls['doctorId'].valid">
+                    <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                        <span class="form-control-feedback"
+                            *ngIf="DoctorCheckUpFeeForm.controls['doctorId'].hasError(validation.type) ">
+                            {{validation.message}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer mb-0 p-2 ">
+        <button class="btn btn-raised btn-secondary me-1 " type="button" [disabled]="loading" (click)="closeClick()">
+            <i class="fa fa-close"></i> Cancel
+        </button>
+        <button class="btn btn-raised btn-primary" type="submit" [disabled]="!DoctorCheckUpFeeForm.valid || loading"
+            [ngClass]="{'m-loader m-loader--right m-loader--info': loading}">
+            <i class="fa fa-check-square-o"></i>{{data.IsReadOnly? "View" :data.doctorCheckFeeId?"Update":"Add"}}
+        </button>
+    </div>
+</form>

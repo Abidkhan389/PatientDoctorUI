@@ -1111,6 +1111,11 @@ input.example-right-align {
 .border-color-red {
   border-color: red;
 }
+.form-container {
+  width: 100%; /* Set the width to 100% to fill the entire container */
+  max-width: 800px; /* Set a maximum width to limit the width if needed */
+  margin: 0 auto; /* Center the form horizontally */
+}
 
 
 

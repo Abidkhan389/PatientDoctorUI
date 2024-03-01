@@ -16,12 +16,9 @@ export class DoctorCheckUpFeeService extends ApiService {
   getAllDoctorCheckUpFee(model:Table){
     let onSuccess = (value) => {
       let data = value;
-      if (data.totalCount != 0)
-      {
+      if (data.totalCount != 0) {
         return data.data;
-      }
-      else
-      {
+      } else {
         showErrorMessage(data.message)
         return false;
       }
@@ -52,7 +49,7 @@ export class DoctorCheckUpFeeService extends ApiService {
         return false;
       }
     };
-    return this.service(this.post(APIPaths.addEditMedicine, model)).pipe(
+    return this.service(this.post(APIPaths.addEditDoctorCheckUpFee, model)).pipe(
       map(value => this.processPayload(value)),
       map(onSuccess)
     );

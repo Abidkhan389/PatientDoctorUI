@@ -65,3 +65,60 @@
             title="Add New"><i class="fa fa-plus "></i></button>
     </div>
 </div>
+<div class="material striped">
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)" style=" max-width: 100%;
+        width: 100%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <div class="row">
+                <!-- Hashing -->
+                <ng-container matColumnDef="sn.">
+                    <mat-header-cell *matHeaderCellDef> #. </mat-header-cell>
+                    <mat-cell *matCellDef="let doctorChkup">{{doctorChkup.serialNo}}</mat-cell>
+                </ng-container>
+                <!-- Status Coloumn -->
+                <ng-container matColumnDef="status" prop="status">
+                    <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                    <mat-cell *matCellDef="let doctorChkup">
+                        <ui-switch [loading]="loading" [checked]="(doctorChkup.status == 1 ? true : false)" size="small"
+                            [(ngModel)]="doctorChkup.status" (change)="updateStatus($event,doctorChkup)">
+                            <i class="fa fa-spinner fa-pulse" *ngIf="loading"></i>
+                        </ui-switch>
+                    </mat-cell>
+                </ng-container>
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                    <mat-cell *matCellDef="let doctorChkup">
+                        <button mat-icon-button class="action-button" color="primary"
+                            (click)="ViewMedicine(doctorChkup.id)">
+                            <i class="fa fa-eye me-1"></i>
+                        </button>
+                        <button mat-icon-button color="primary" *ngIf="doctorChkup.status==1"
+                            (click)="AddEdit(doctorChkup.id)">
+                            <i class="fa fa-edit me-1"></i>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+                <!-- DoctorName Column -->
+                <ng-container matColumnDef="DoctorName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</mat-header-cell>
+                    <mat-cell *matCellDef="let doctorChkup"> {{doctorChkup.doctorName}} </mat-cell>
+                </ng-container>
+                <!-- DocterFee Column -->
+                <ng-container matColumnDef="DocterFee">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Fee</mat-header-cell>
+                    <mat-cell *matCellDef="let doctorChkup"> {{doctorChkup.docterFee}} </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let doctorChkup; columns: displayedColumns;"></mat-row>
+            </div>
+        </mat-table>
+        <div *ngIf="noData">
+            <p style="text-align: center;margin-top: 15px;">No Data Found.</p>
+        </div>
+        <mat-paginator [length]="count" (page)="onPaginate($event)" showFirstLastButtons
+            [pageSizeOptions]="[5,10, 100, 200]">
+        </mat-paginator>
+    </div>
+</div>

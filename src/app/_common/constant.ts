@@ -17,7 +17,7 @@ var medicineUrl = baseUrl + 'medicine/'
 var attachmentUrl = baseUrl + 'Attachment/';
 var DashboardUrl=baseUrl+'dashboard';
 var administrationUrl = baseUrl + 'administrator/';
-var doctorCheckUpFeeUrl = baseUrl + 'doctorCheckUpFee'
+var doctorCheckUpFeeUrl = baseUrl + 'doctorCheckUpFee/'
 
 export const APIPaths = {
 
@@ -59,7 +59,7 @@ export const APIPaths = {
     updateMedicine: medicineUrl + 'activeInActive',
     getMedicineById :medicineUrl + 'getMedicineById',
     //----------- Doctor CheckUp Fee -----------
-    getAllDoctorCheckUpFee : doctorCheckUpFeeUrl + 'getAllByProc',
+    getAllDoctorCheckUpFee:doctorCheckUpFeeUrl + 'getAllByProc',
     updateDoctorCheckUpFee : doctorCheckUpFeeUrl + 'activeInActive',
     addEditDoctorCheckUpFee : doctorCheckUpFeeUrl + 'addEditDoctorCheckUpFee',
     getDoctorCheckUpFeeById : doctorCheckUpFeeUrl + 'getDoctorCheckUpFeeById'

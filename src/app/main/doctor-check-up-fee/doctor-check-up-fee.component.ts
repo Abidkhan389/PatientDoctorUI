@@ -9,7 +9,6 @@ import { NgbModalOptions, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { finalize } from 'rxjs/operators';
 import { Messages, NoWhitespaceValidator, ResultMessages, showErrorMessage, showSuccessMessage } from 'src/app/_common';
 import { DoctorCheckUpFeeService } from 'src/app/_services/administration/doctor-check-up-fee.service';
-import { MedicineService } from 'src/app/_services/administration/medicine.service';
 import { Table } from 'src/app/interfaces/ITable';
 import { AddEditDoctorCheckUpFeeComponent } from './add-edit-doctor-check-up-fee/add-edit-doctor-check-up-fee.component';
 
@@ -27,7 +26,7 @@ export class DoctorCheckUpFeeComponent implements OnInit {
   MedicineTypeList: any;
   modalOptions: NgbModalOptions = {};
   dataSource !: MatTableDataSource<any>;
-  displayedColumns: string[] = ['sn.', 'status','MedicineName','MedicineType','DoctoerName','StartingDate','ExpiryDate','actions'];
+  displayedColumns: string[] = ['sn.', 'status','DoctorName','DocterFee','actions'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   pageSize = 5;
@@ -105,7 +104,7 @@ export class DoctorCheckUpFeeComponent implements OnInit {
   validateForm(){
     this.form= this.fb.group({
       doctorName:['', Validators.compose([NoWhitespaceValidator])],
-      doctorFee:['', Validators.compose([NoWhitespaceValidator])],
+      doctorFee: [null, Validators.compose([NoWhitespaceValidator, Validators.pattern(/^-?\d*$/)])],
     })
   }
   fetchAllDoctorCheckFee(){
