@@ -15,6 +15,7 @@ import { MedicineComponent } from './medicine/medicine.component';
 import { AddEditMedicineComponent } from './medicine/add-edit-medicine/add-edit-medicine.component';
 import { DoctorCheckUpFeeComponent } from './doctor-check-up-fee/doctor-check-up-fee.component';
 import { AddEditDoctorCheckUpFeeComponent } from './doctor-check-up-fee/add-edit-doctor-check-up-fee/add-edit-doctor-check-up-fee.component';
+import { PatientRecordComponent } from './patient-record/patient-record.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { AddEditDoctorCheckUpFeeComponent } from './doctor-check-up-fee/add-edit
         AddEditMedicineComponent,
         DoctorCheckUpFeeComponent,
         AddEditDoctorCheckUpFeeComponent,
+        PatientRecordComponent,
     ],
     imports: [
         CommonModule,

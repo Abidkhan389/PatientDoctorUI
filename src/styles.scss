@@ -1117,6 +1117,25 @@ input.example-right-align {
   margin: 0 auto; /* Center the form horizontally */
 }
 
+/* Certicate Styling */
+
+.inner-dotted-border {
+  width: 720px;
+  height: 473px;
+  padding: 20px;
+  text-align: center;
+  border: 5px solid #22406b;
+  border-style: dotted;
+}
+.outer-border {
+  width: 770px;
+  height: 525px;
+  padding: 15px;
+  text-align: center;
+  border: 10px solid #22406b;
+}
+
+
 
 
 

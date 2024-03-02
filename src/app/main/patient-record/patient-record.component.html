@@ -1,0 +1,236 @@
+<div class="filter-widget card">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" role="form">
+        <div (click)="isCollapsed = !isCollapsed" class="filter-header p-2">
+            <span class="filter-title"><i class="fa fa-search me-2"></i>Advanced Search Filters</span>
+            <a [attr.aria-expanded]="!isCollapsed" aria-controls="collapseFilter" style="float:right">
+                <i class="fa fa-search" [ngClass]="{'fa-chevron-down': !isCollapsed, 'fa-chevron-up': isCollapsed}"></i>
+            </a>
+        </div>
+        <div id="collapseFilter" [ngbCollapse]="!isCollapsed">
+            <div class="filter-content">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Doctor Name:</label>
+                            <input type="text" class="form-control " formControlName="doctorName"
+                                placeholder="Search Here">
+                            <div *ngIf="form.controls['doctorName'].touched && !form.controls['doctorName'].valid">
+                                <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                                    <span class="form-control-feedback"
+                                        *ngIf="form.controls['doctorName'].hasError(validation.type) ">
+                                        {{validation.message}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Patient CNIC:</label>
+                            <input type="text" class="form-control " formControlName="PatientCnic" placeholder="XXXXXXXXXXX">
+                            <div *ngIf="form.controls['PatientCnic'].touched && !form.controls['PatientCnic'].valid">
+                                <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                                    <span class="form-control-feedback"
+                                        *ngIf="form.controls['PatientCnic'].hasError(validation.type) ">
+                                        {{validation.message}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Patient Name:</label>
+                            <input type="text" class="form-control " formControlName="patientName" placeholder="Search Here">
+                            <div *ngIf="form.controls['patientName'].touched && !form.controls['patientName'].valid">
+                                <div *ngFor="let validation of validationMessages.value" class="has-danger">
+                                    <span class="form-control-feedback"
+                                        *ngIf="form.controls['patientName'].hasError(validation.type) ">
+                                        {{validation.message}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <mat-form-field color="accent" appearance="outline" style="display: block;">
+                                <mat-label>From-Date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="patientCheckUpDateFrom"  [max]="maxDate" placeholder="MM/DD/YYYY">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"
+                                    style="position: absolute; margin:-30px; line-height: 2px;"></mat-datepicker-toggle>
+                                <mat-datepicker #picker color="primary"></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <mat-form-field color="accent" appearance="outline" style="display: block;">
+                                <mat-label>To-Date</mat-label>
+                                <input matInput [matDatepicker]="picker2" formControlName="patientCheckUpDateTo"  [max]="maxDate" placeholder="MM/DD/YYYY">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker2"
+                                    style="position: absolute; margin:-30px; line-height: 2px;"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-12">
+                        <div class="form-group mb-0">
+                            <button class="mb-2 me-2 btn-icon btn-shadow  btn btn-primary"
+                                [ngClass]="{'m-loader m-loader--right m-loader--info': loading}" type="submit"
+                                [disabled]="!form.valid" style="margin-top: 10px;">
+                                <i class="fa fa-search"></i> Search
+                            </button>
+                            <button class="mb-2 mr-2 btn-icon btn-shadow  btn btn-outline-danger " type="reset"
+                                (click)="resetTable()">
+                                <i class="fa fa-close"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="material striped">
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)" style=" max-width: 100%;
+        width: 100%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <div class="row">
+                <!-- Hashing -->
+                <ng-container matColumnDef="sn.">
+                    <mat-header-cell *matHeaderCellDef> #. </mat-header-cell>
+                    <mat-cell *matCellDef="let patientrecord">{{patientrecord.serialNo}}</mat-cell>
+                </ng-container>
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef>Patient Report</mat-header-cell>
+                    <mat-cell *matCellDef="let patientrecord">
+                        <button mat-icon-button  color="primary"
+                            (click)="ViewPatientRecordPdf(content,patientrecord.patientId,patientrecord.doctorId )">
+                            <span class="material-icons">
+                                picture_as_pdf
+                                </span>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+                <!-- PatientName Column -->
+                <ng-container matColumnDef="PatientName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Patient Name</mat-header-cell>
+                    <mat-cell *matCellDef="let patientrecord"> {{patientrecord.patientName}} </mat-cell>
+                </ng-container>
+                <!-- PatientCnic Column -->
+                <ng-container matColumnDef="PatientCnic">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Patient Cnic</mat-header-cell>
+                    <mat-cell *matCellDef="let patientrecord"> {{patientrecord.patientCnic}} </mat-cell>
+                </ng-container>
+                <!-- PatientCheckUpDate Column -->
+                <ng-container matColumnDef="PatientCheckUpDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>PatientCheckUpDate</mat-header-cell>
+                    <mat-cell *matCellDef="let patientrecord"> {{patientrecord.patientCheckUpDate | date:'short'}} </mat-cell>
+                </ng-container>
+                <!-- PatientCheckUpDoctorFee Column -->
+                <ng-container matColumnDef="PatientCheckUpDoctorFee">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>StartiPatientCheckUpDoctorFeeng</mat-header-cell>
+                    <mat-cell *matCellDef="let patientrecord"> {{patientrecord.patientCheckUpDoctorFee }} </mat-cell>
+                </ng-container>
+                 <!-- DoctorName Column -->
+                 <ng-container matColumnDef="DoctorName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</mat-header-cell>
+                    <mat-cell *matCellDef="let patientrecord"> {{patientrecord.doctorName}} </mat-cell>
+                </ng-container>
+                <!--DoctorEmail Coloum-->>
+                <ng-container matColumnDef="DoctorEmail">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Email</mat-header-cell>
+                    <mat-cell *matCellDef="let patientrecord"> {{patientrecord.doctorEmail}} </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let patientrecord; columns: displayedColumns;"></mat-row>
+            </div>
+        </mat-table>
+        <div *ngIf="noData">
+            <p style="text-align: center;margin-top: 15px;">No Data Found.</p>
+        </div>
+        <mat-paginator [length]="count" (page)="onPaginate($event)" showFirstLastButtons
+        [pageSizeOptions]="[5,10, 100, 200]">
+    </mat-paginator>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="outer-border" id="print">
+            <div class="inner-dotted-border">
+                <span class="certification">Patient Report With Details</span>
+                <!-- <br> -->
+                <div class="row mt-1">
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-12 text-center">
+                        <i class="fa fa-user" style="padding-right: 5px;"></i>Patient Name: {{patientReportPdf.patientName}}
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-12 text-center">
+                        <i class="fa fa-home" style="padding-right: 5px;"></i>Patient City:     {{patientReportPdf.city}}
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-12 text-center">
+                        <i class="fa fa-phone" style="padding-right: 5px;"></i>Patient Phone :      {{patientReportPdf.patientMobileNumber}}
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-12 text-center">
+                        <i class="fa fa-id-card" style="padding-right: 5px;"></i>Patient Cnic:      {{patientReportPdf.patientCnic}}
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-12 text-center">
+                        <i class="fa fa-clock-o" style="padding-right: 5px;"></i>Patient CheckUp Date:      {{patientReportPdf.patientCheckUpDate | date:'short'}}
+                    </div>
+                </div>
+                <span class="certify"><i>Doctor Details</i></span>
+                <br>
+                <br>
+                <div class="row ">
+                    <div class="form-section">
+                        <!-- <div class="col-12 text-bold-400"><h5>Course</h5></div> -->
+                        <div class="col-12 float-right">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-12 text-center">
+                        <i class="fa fa-id-card" style="padding-right: 5px;"></i>Doctor Name:          {{patientReportPdf.doctorName}}
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-12 text-center">
+                        <i class="fa fa-id-card" style="padding-right: 5px;"></i>Doctor Email:         {{patientReportPdf.doctorEmail}}
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-12 text-center">
+                        <i class="fa fa-id-card" style="padding-right: 5px;"></i>DocTor Fee:            {{patientReportPdf.patientCheckUpDoctorFee}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="mb-2 mr-2 btn-icon btn-shadow  btn btn-outline-secondary" type="button" [disabled]="loading"
+            (click)="c('Cross click')">
+            <i class="ft-x"></i> Cancel
+        </button>
+        <button class="mb-2 me-2 btn-icon btn-shadow  btn btn-outline-primary" type="button"
+            [ngClass]="{'m-loader m-loader--right m-loader--info': loading}" (click)="onPrint()">
+            <i class="fa fa-check-square-o"></i> Print
+        </button>
+    </div>
+</ng-template>
+
+
