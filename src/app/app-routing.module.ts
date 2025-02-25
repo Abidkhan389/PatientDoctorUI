@@ -19,7 +19,7 @@ const routes: Routes = [
     
  },
   {
-    path: 'admin',
+    path: '',
     component: BaseLayoutComponent,
     runGuardsAndResolvers: 'always',
     children: [

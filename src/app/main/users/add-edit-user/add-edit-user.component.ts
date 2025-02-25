@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { Helpers, Messages, NoWhitespaceValidator, Patterns, ResultMessages, showErrorMessage } from 'src/app/_common';
 import { UserManagementService } from 'src/app/_services/administration/user-management.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -20,6 +21,7 @@ export class AddEditUserComponent {
   userList: any;
   RolesList: any;
   hide = true;
+  maxDate =moment(new Date()).format('YYYY-MM-DD')
   constructor(public userManagementService: UserManagementService, private fb: FormBuilder, protected router: Router, private dialogref: MatDialogRef<AddEditUserComponent>,
     private dilog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.getAllRoles();
@@ -91,6 +93,8 @@ export class AddEditUserComponent {
       cnic: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.CnicPattern), Validators.minLength(13), Validators.maxLength(13)])],
       city: ['', Validators.compose([NoWhitespaceValidator, Validators.required, Validators.pattern(Patterns.titleRegex), Validators.maxLength(20)])],
       roleId: [null, Validators.required],
+      officeDate : ['', Validators.required],
+      radioButton : ['', Validators.required],
     });
   }
   //Its Close The DialogRef Modal
